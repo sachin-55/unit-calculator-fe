@@ -1,0 +1,253 @@
+*,
+*::before,
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 10px;
+    color: #000;
+    scroll-behavior: smooth;
+}
+.link-items{
+    text-decoration: none;
+}
+.container{
+    width: 100%;
+    max-width: 122em;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+// Header
+.header{
+    position: relative;
+    height: 100px;
+    background-image: linear-gradient(to bottom,rgba(23, 165, 212, 0.796) 20%,transparent);
+    z-index: 1050;
+}
+
+.logo{
+    position: relative;
+    margin: 0 auto;
+    background-color: red;
+    width: 23rem;
+    z-index: 1100;
+}
+.word{
+    position: absolute;
+    display: inline-block;
+    font-size: 2rem;
+    color: #fff;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+.first-word{
+    font-size: 5rem;
+    line-height: 5rem;
+    letter-spacing: 1rem;
+    margin-right: -1rem;
+    font-weight: 900;
+}
+.second-word{
+    font-size: 4rem;
+    line-height: 5rem;
+    padding-top: 4.5rem;
+    letter-spacing: 0.5rem;
+    margin-right: -0.5rem;
+    font-weight: 300;
+}
+
+.menu-toggler{
+    position: relative;
+    z-index: 2000;
+}
+.menu-toggle{
+    font-size: 3.5rem;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.pipe{
+    display: inline-block;
+    transform: rotateZ(90deg);
+    transition: display 0.5s;
+}
+.cross{
+    display: none;
+    transform: scale(0);
+    transition: display 0.5s;
+    padding-right:0.2rem;
+
+}
+.nav-list{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: hsl(120px , 10%,30%);
+    height: 100vh;
+    width: 30rem;
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 2rem;
+}
+.nav-items{
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+    border-bottom: 0.2rem solid white;
+    color: #fff;
+}
+.nav-items:hover{
+    color: hsl(120px , 50%,80%);
+    border-color: hsl(120px , 50%,80%);
+}
+.open .pipe{
+    display: none;
+}
+.open .cross{
+    display: inline-block;
+    transform: scale(1);
+}
+.open .nav-list{
+    transform: translateX(0);
+}
+
+.open .nav::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 1250;
+    background-color: rgba(0,0,0,0.6);
+
+}
+
+// Hero
+.hero{
+    position: absolute;
+    top: 0;
+    background: linear-gradient(to bottom,transparent,rgba(26, 122, 69, 0.796)),url('../images/beach-boat.jpg') center no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+.headline{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 50vh;
+}
+.sub-headline{
+    font-size: 4rem;
+    color: rgba(255,255,255,0.8);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+    letter-spacing: 0.2rem;
+    margin-right: -0.2rem;
+    color: rgba(159, 240, 160, 0.878);
+}
+.sub-headline span{
+    font-size: 7rem;
+    font-weight: bold;
+    color: rgb(192, 255, 196);
+    line-height: 0.1rem;
+}
+.logo-headline{
+    font-size: 4rem;
+    line-height: 4rem;
+    letter-spacing: 0.2rem;
+    color: #fff;
+    font-weight: 100;
+}
+
+.main-headline{
+    font-size: 2rem;
+    line-height: 3rem;
+    text-align: center;
+    width: 90%;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.05rem;
+    margin-right: -0.05rem;
+
+}
+.btn{
+    color: #cfcfcf;
+    font-size: 2rem;
+    text-align: center;
+    width: 11rem;
+    margin: 0 auto;
+}
+.btn-explore{
+    background-color: rgba(60, 143, 60, 0.789);
+    border: 1px solid rgba(255,255,255,0.5);
+}
+.btn-explore:hover,
+.btn-explore:focus{
+    background-color: rgba(55, 172, 55, 0.789);
+    color: rgb(16, 49, 16);
+    border: 1px solid rgb(16, 49, 16,0.5);
+
+}
+.separator{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.asterisk{
+    font-size: 3rem;
+    color:#fff;
+    margin: 0 .5rem;
+}
+.line{
+    width: 100%;
+    max-width: 12.8rem;
+    height: 0.25rem;
+    background-color: #fff;
+    position: relative;
+}
+.firstline::before,
+.secondline::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border:0.6rem solid transparent;
+}
+.firstline::before{
+    border-left-color: #fff;
+}
+.secondline::before{
+    border-right-color: #fff;
+    right: 0;
+}
+
+.explore{
+    background-color: red;
+    animation: removeFrontLayer 1s ease;
+}
+.start-explore{
+    position: absolute;
+    top: 0;
+    z-index: -1000;
+}
+@keyframes removeFirstLayer{
+    
+}
