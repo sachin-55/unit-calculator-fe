@@ -42,9 +42,9 @@ const Landingpage = () => {
                         <div className="sub-headline"><span>W</span>elcome</div>
                         <div className='logo-headline'>Unit Calculator</div>
                         <div className='separator'>
-                            <div className="line one"></div>
-                            <div className="line middle">*</div>
-                            <div className="line two"></div>
+                            <div className="line firstline"></div>
+                            <div className="asterisk">*</div>
+                            <div className="line secondline"></div>
                         </div>
                         <div className="main-headline">Easy way to divide your home sub- meter units</div>
                     </div>

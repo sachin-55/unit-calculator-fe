@@ -169,16 +169,12 @@ html{
 }
 .logo-headline{
     font-size: 4rem;
-    line-height: 5rem;
+    line-height: 4rem;
     letter-spacing: 0.2rem;
     color: #fff;
     font-weight: 100;
 }
-.line.middle{
-    color: #fff;
-    font-size: 3rem;
-    line-height: 1rem;
-}
+
 .main-headline{
     font-size: 2rem;
     line-height: 3rem;
@@ -207,3 +203,40 @@ html{
     border: 1px solid rgb(16, 49, 16,0.5);
 
 }
+.separator{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.asterisk{
+    font-size: 3rem;
+    color:#fff;
+    margin: 0 .5rem;
+}
+.line{
+    width: 100%;
+    max-width: 12.8rem;
+    height: 0.25rem;
+    background-color: #fff;
+    position: relative;
+}
+.firstline::before,
+.secondline::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border:0.6rem solid transparent;
+}
+.firstline::before{
+    border-left-color: #fff;
+}
+.secondline::before{
+    border-right-color: #fff;
+    right:  0;
+
+}
+
