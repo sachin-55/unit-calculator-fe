@@ -1,0 +1,8 @@
+node_modules
+
+build/
+dist/
+
+.module-cache
+
+*.env
