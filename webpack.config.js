@@ -60,13 +60,19 @@ module.exports=(env)=>{
                         ],
                     },
                     {
-                        test: /\.(png|jpe?g|gif)$/i,
+                        test: /\.(woff(2)?|ttf|eot|svg|png|jpe?g|gif)$/i,
                         use: [
                             {
                                 loader: 'file-loader',
                             },
                         ],
                     },
+                    {
+                        test: /\.(woff|woff2|ttf|eot|svg)$/,
+                        use: {
+                          loader: 'url-loader',
+                        },
+                      },
                 ]
             },
             mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',

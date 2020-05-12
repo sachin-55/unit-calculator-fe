@@ -1,20 +1,27 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import '../scss/landingpage.scss';
+
+import LoginRegisterPage from './LoginRegisterPage';
+
 const Landingpage = () => {
     const [menuOpen,setMenuOpen] = React.useState('');
-    const [exploreBtn,setExploreBtn] = React.useState('');
+    const [animateUp,setAnimateUp] = React.useState('');
+    const [animateDown,setAnimateDown] = React.useState('');
+    const [animateReveal,setAnimateReveal] = React.useState('');
 
     const toggleMenu=()=>{
         menuOpen===""?setMenuOpen('open'): setMenuOpen("");
     }
     const enableExplore=()=>{
-        setExploreBtn('explore')
+        setAnimateDown('animateDown');
+        setAnimateUp('animateUp');
+        setAnimateReveal('animateReveal');
+
     }
     return (
         <>
-            <div className={`${exploreBtn}`}>
-                <div className={`header ${menuOpen} ${exploreBtn}`}>
+                <div className={`header ${menuOpen} ${animateUp}`}>
                     <div className="container">
                         <div className='nav'>
                             <Link to='/' >
@@ -42,7 +49,7 @@ const Landingpage = () => {
                         </div>
                     </div>
                 </div>
-                <div className='hero'>
+                <div className={`hero ${animateDown}`}>
                     <div className='container'>
                         <div className='headline'>
                             <div className="sub-headline"><span>W</span>elcome</div>
@@ -55,13 +62,12 @@ const Landingpage = () => {
                             <div className="main-headline">Easy way to divide your home sub- meter units</div>
                         </div>
                         <Link to='/' className="link-items">
-                            <div className="btn btn-explore" onClick={enableExplore}> Explore</div>
+                            <div className="btn btn-explore" onClick={enableExplore}> Enter</div>
                         </Link>
                     </div>
                 </div>
-            </div>
-            <div className="start-explore">
-               <h1> Start Explore</h1>
+            <div className={`start-explore ${animateReveal}`}>
+               <LoginRegisterPage/>
             </div>
         </>
     );

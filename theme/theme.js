@@ -23,7 +23,7 @@ export default {
       text: "#090d1f",
       altText:'#c2c2c2',
       backgroundSecond: "#fcfcfc",
-      background:'#c2c2c2',
+      background:'#c9c9c9',
       primary: "#ED6A5A",
       secondary: "#8B2635",
       muted: "#e6e6e6",
@@ -141,6 +141,34 @@ export default {
         borderRadius: 50,
         padding: "5px"
       }
+    },
+    forms:{
+      input:{
+        border:'2px solid gray',
+        height:'40px',
+        '&:focus': {
+          outline: 'none',
+          borderBottom:t => `2px solid ${t.colors.accent}`
+        },
+      },
+
+    },
+    buttons:{
+      primary:{
+        padding:'0 20px',
+        border:'1px solid gray',
+        backgroundColor:'transparent',
+        cursor:'pointer',
+        outline:'none',
+        '&:hover':{
+          border:'1px solid rgba(0,0,0,0.3)',
+        },
+        '&:active':{
+          backgroundColor:'rgba(1, 36, 15,0.9)',
+
+        }
+      }
     }
+
   };
   

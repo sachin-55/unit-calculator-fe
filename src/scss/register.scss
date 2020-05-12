@@ -1,0 +1,20 @@
+.register-component{
+    position: relative;
+    // top: 30%;
+    transform: scale(-1);
+    font-size: 2rem;
+    color: #fff;
+    padding: 1rem;
+}
+.register-component h1{
+    font-size: 3.5rem;
+    letter-spacing: 0.8rem;
+}
+.arrow{
+    cursor: pointer;
+    font-size: 3rem;
+}
+.arrow:hover{
+    font-size: 3rem;
+    color: rgba(64, 48, 117, 0.864);
+}
