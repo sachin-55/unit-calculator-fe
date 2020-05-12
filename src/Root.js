@@ -5,17 +5,21 @@ import theme from "../theme/theme";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Landingpage = React.lazy(()=>import('./pages/Landingpage'));
+const Dashboard = React.lazy(()=>import('./components/Dashboard'));
 
 const Root = ()=>{
 
     return (
         <ThemeProvider theme={theme}>
-            <React.Suspense fallback={<span>Loading...</span>}>
+            <React.Suspense fallback={<div >Loading...</div>}>
                 <Router>
                     <Switch>
                         <Route exact path='/'>
                             <Landingpage/>
-                            </Route> 
+                        </Route> 
+                        <Route exact path='/dashboard'>
+                            <Dashboard/>
+                        </Route> 
                         <Route render={()=><h1>Not Found</h1>}/>
 
                     </Switch>

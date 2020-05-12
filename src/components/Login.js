@@ -2,8 +2,14 @@ import React from 'react';
 import '../scss/login.scss'
 import { Box , Label,Input,Button} from 'theme-ui';
 import { FaArrowAltCircleLeft } from "react-icons/fa";
+import {useHistory} from 'react-router-dom';
 
 const Login = ({backClick}) => {
+    const history=useHistory()
+    const handleLogin=()=>{
+        history.push('/dashboard')    
+    }
+
     return (
         <div className='login-component'>
             <FaArrowAltCircleLeft onClick={backClick} className='arrow'/>
@@ -35,7 +41,7 @@ const Login = ({backClick}) => {
                 }}
 
                 />
-                 <Button>
+                 <Button onClick={handleLogin}>
                     Login
                 </Button>
             </Box>
