@@ -1,0 +1,142 @@
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 10px;
+    color: #000;
+    scroll-behavior: smooth;
+}
+body{
+    overflow: hidden;
+}
+.link-items{
+    text-decoration: none;
+}
+.container{
+    width: 100%;
+    max-width: 122em;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+// Header Style
+.dash__header{
+    position: relative;
+    height: 100px;
+    background-color: rgb(23, 165, 212);
+    background-image: linear-gradient(to bottom,rgba(0,0,0,0.75) ,transparent);
+    z-index: 1050;
+  
+}
+
+.dash__logo{
+    position: relative;
+    margin: 0 auto;
+    background-color: rgb(23, 165, 212);
+    width: 23rem;
+    z-index: 1100;
+}
+.dash__word{
+    position: absolute;
+    display: inline-block;
+    font-size: 2rem;
+    color: #fff;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+.dash__header .first-word{
+    font-size: 5rem;
+    line-height: 5rem;
+    letter-spacing: 1rem;
+    margin-right: -1rem;
+    font-weight: 900;
+}
+.dash__header .second-word{
+    font-size: 4rem;
+    line-height: 5rem;
+    padding-top: 4.5rem;
+    letter-spacing: 0.5rem;
+    margin-right: -0.5rem;
+    font-weight: 300;
+}
+
+.menu-toggler{
+    position: relative;
+    z-index: 2000;
+}
+.menu-toggle{
+    font-size: 3.5rem;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.pipe{
+    display: inline-block;
+    transform: rotateZ(90deg);
+    transition: display 0.5s;
+}
+.cross{
+    display: none;
+    transform: scale(0);
+    transition: display 0.5s;
+    padding-right:0.2rem;
+
+}
+.nav-list{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color:rgba(23, 165, 212,0.9);
+    background-image: linear-gradient(135deg,rgba(255,255,255,0.45),rgba(0,0,0,0.45) ,rgba(255,255,255,0.45) ,rgba(0,0,0,0.45),rgba(255,255,255,0.45));
+    height: 100vh;
+    width: 30rem;
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 2rem;
+}
+.nav-items{
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+    border-bottom: 0.2rem solid white;
+    color: rgb(10, 55, 63);
+}
+.nav-items:hover{
+    color: hsl(120px , 50%,80%);
+    border-color: hsl(120px , 50%,80%);
+}
+.open .pipe{
+    display: none;
+}
+.open .cross{
+    display: inline-block;
+    transform: scale(1);
+}
+.open .nav-list{
+    transform: translateX(0);
+}
+
+.open .nav::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 1250;
+    background-color: rgba(0,0,0,0.6);
+}
+
+/////////////////////////////////////////////////////////////////////////////////

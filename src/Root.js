@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Landingpage = React.lazy(()=>import('./pages/Landingpage'));
 const Dashboard = React.lazy(()=>import('./components/Dashboard'));
+const LoginRegisterPage = React.lazy(()=>import('./pages/LoginRegisterPage'));
 
 const Root = ()=>{
 
@@ -16,10 +17,14 @@ const Root = ()=>{
                     <Switch>
                         <Route exact path='/'>
                             <Landingpage/>
-                        </Route> 
+                        </Route>
+                        <Route exact path='/login'>
+                            <LoginRegisterPage/>
+                        </Route>  
                         <Route exact path='/dashboard'>
                             <Dashboard/>
                         </Route> 
+
                         <Route render={()=><h1>Not Found</h1>}/>
 
                     </Switch>

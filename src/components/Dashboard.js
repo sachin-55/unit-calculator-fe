@@ -1,10 +1,11 @@
 import React from 'react';
+import Navbar from './Navbar';
 
 const Dashboard = () => {
     return (
-        <div>
-            <h1>DashBoard</h1>
-        </div>
+        <>
+          <Navbar/>  
+        </>
     );
 }
 

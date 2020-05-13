@@ -41,26 +41,28 @@ const LoginRegisterPage = () => {
 
 
     return (
-        <div className='container'>
-            <div className={`box ${animationForBox}`}>
-                <div className='login-register plane'>
-                        <h1>Hi There!!!</h1>
-                        <p>
-                            Let's start to calculate
-                        </p>
-                        <p className='newUser'>If you are new User, <span onClick={handleRegisterClick}>click here</span></p>
-                        <Button className="btn login-btn" onClick={handleLoginClick}>Login</Button>
-                </div>
-                <div className='login plane'>
-                    <Login backClick={handleLoginBackClick} />
-                </div>
-                <div className='register plane'>
-                    <Register backClick={handleRegisterBackClick} />
+        <div className='background-wrapper'>
+            <div className='container'>
+                <div className={`box ${animationForBox}`}>
+                    <div className='login-register plane'>
+                            <h1>Hi There!!!</h1>
+                            <p>
+                                Let's start to calculate
+                            </p>
+                            <p className='newUser'>If you are new User, <span onClick={handleRegisterClick}>click here</span></p>
+                            <Button className="btn login-btn" onClick={handleLoginClick}>Login</Button>
+                    </div>
+                    <div className='login plane'>
+                        <Login backClick={handleLoginBackClick} />
+                    </div>
+                    <div className='register plane'>
+                        <Register backClick={handleRegisterBackClick} />
 
-                </div>
-                <div className='back-side plane'>
-                </div>
-                <div className='top plane'>
+                    </div>
+                    <div className='back-side plane'>
+                    </div>
+                    <div className='top plane'>
+                    </div>
                 </div>
             </div>
         </div>

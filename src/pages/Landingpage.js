@@ -17,7 +17,6 @@ const Landingpage = () => {
         setAnimateDown('animateDown');
         setAnimateUp('animateUp');
         setAnimateReveal('animateReveal');
-
     }
     return (
         <>
@@ -30,12 +29,12 @@ const Landingpage = () => {
                                     <span className="word second-word">Calculator</span>
                                 </div>
                                 </Link>
-                            <div className='menu-toggler' onClick={toggleMenu}>
+                            {/* <div className='menu-toggler' onClick={toggleMenu}>
                                 <span className="menu-toggle cross">X</span>
                                 <span className="menu-toggle pipe">|||</span>
 
-                            </div>
-                            <div className='nav-list'>
+                            </div> */}
+                            {/* <div className='nav-list'>
                                 <Link to='/' className='link-items'>
                                     <div className='nav-items'>Home</div>
                                 </Link>
@@ -45,7 +44,7 @@ const Landingpage = () => {
                                 <Link to='#' className='link-items'>
                                     <div className='nav-items'>Contacts</div>
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
