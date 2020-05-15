@@ -1,0 +1,23 @@
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 10px;
+    color: #000;
+    scroll-behavior: smooth;
+}
+body{
+    overflow-x: hidden;
+}
+.link-items{
+    text-decoration: none;
+}
+.container{
+    width: 100%;
+    max-width: 122em;
+    margin: 0 auto;
+    padding: 0 2rem;
+}

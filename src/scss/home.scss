@@ -1,0 +1,116 @@
+@import '../scss/all.scss';
+
+.home-wrapper{
+    position: relative;
+    height: calc(100vh ) ;
+    width: 100%;
+    background: radial-gradient(transparent 20%,rgba(0,0,0,0.2),rgba(0,0,0,0.5),rgba(0,0,0,0.7) 80%),url('../images/beach-boat.jpg') center no-repeat;
+    background-size: cover;
+}
+.calculation{
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width:500px ;
+    background-color: rgba(255, 255, 255, 0.347);
+    padding: 2rem;
+    
+}
+.calculation__title{
+    font-size: 2.8rem;
+    font-weight: 500;
+    letter-spacing: 0.4rem;
+    color: rgb(58, 109, 170);
+    text-shadow: 1px -1px 1px #000;
+    text-align: center;
+}
+
+.calculation__form{
+    background-color: rgba(255, 255, 255, 0.35);
+    padding-bottom: 4rem;
+}
+.calculation__form-row{
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+.calculation__name{
+    font-size: 1.5rem;
+}
+
+.calculation__value input[type='number']{
+    border: none;
+    background-color:transparent;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.497);
+    outline: none;
+    padding-left: 1rem;
+}
+.calculation__value input[type='number']:focus{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.497);
+}
+.compute-btn{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid gray;
+    border-radius: 5rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: rgb(58, 109, 170);
+    text-shadow: 1px -1px 0.5px rgba(0, 0, 0, 0.755);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    outline: none;
+}
+.compute-btn:focus,
+.compute-btn:hover{
+    background-color:rgb(58, 109, 170);    
+    color:#fff
+}
+.compute-btn:active{
+    background-color:rgb(19, 37, 59);    
+    color:#fff
+}
+
+.calculation__result{
+    position: absolute;
+    top: 34rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width:500px ;
+    background-color: rgba(255, 255, 255, 0.347);
+    padding: 2rem;
+    margin: 0 auto;
+}
+.result__title{
+    font-size: 2.8rem;
+    font-weight: 500;
+    letter-spacing: 0.2rem;
+    color: rgb(58, 109, 170);
+    text-shadow: 1px -1px 1px #000;
+    text-align: center;
+}
+.result__row{
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+.result__row span:first-child{
+    font-weight: 700;
+    padding-left: 3rem;
+    width: 10rem;
+}
+.result__row span:last-child{
+    font-weight: 100;
+    padding-left: 3rem;
+    width: 10rem;
+    margin-left: -2.5rem;
+}
