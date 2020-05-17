@@ -1,29 +1,31 @@
 import React from 'react';
 import '../../scss/register-meter.scss';
 
-const RegisterMeter = () => {
-    const [numberOfMeter,setNumberOfMeter] = React.useState('1');
-    const [fields , setFields] = React.useState('');
-    const [meter,setMeter] = React.useState([]);
-
-    React.useEffect(()=>{
-        createNameField();
-    },[numberOfMeter]);
-
-    const createNameField=()=>{
-        let input=[];
-        for(let i=0;i<parseInt(numberOfMeter);i++){
-            input.push(
-               <div key={i} className="register-field-row">
-                    <input type='text' placeholder="Meter Name"/> <input type='number'  placeholder="Meter %"/><span>%</span>
-                </div>
-            )
-        }
-       setFields(input);       
+const meterInitial={
+        meterName:'',
+        percentage:'100'
     }
 
-    const handleChange = async(e)=>{
-        await setNumberOfMeter(e.target.value);
+const RegisterMeter = () => {
+    const [meter,setMeter] = React.useState([{...meterInitial}]);
+
+    const addFields = ()=>{
+        setMeter([...meter,{ ...meterInitial}]);
+    }
+    const removeField = (e)=>{
+        const updatedMeter = [...meter];
+        updatedMeter.splice(e.target.dataset.id,1);
+        setMeter(updatedMeter);
+    }
+    const handleDynamicChange = (e)=>{
+        const updatedMeter = [...meter];
+        updatedMeter[e.target.dataset.id][e.target.className] = e.target.value;
+        setMeter(updatedMeter);
+    }
+
+    const handleSave=()=>{
+        console.log('save');
+        console.log(meter);
     }
 
     return (
@@ -34,17 +36,51 @@ const RegisterMeter = () => {
                         <h1>Enter number of sub-meters</h1> 
                     </div>
                     <div className="register-meter__info">
-                        <p>How many meters are used ?<br/> Register count and also the percentage shared if specific meter is shared between others members. Also specify meter name for easy identification. </p>
+                        <p>How many meters are used ?<br/> Register required number of sub-meter and also the percentage shared if specific meter is shared between others members. Also specify meter name for easy identification. </p>
+                        <div className='example'>
+                            <button>For Example</button>
+                            <div className='example-picture'>
+
+                            </div>
+
+                        </div>
                     </div>
                     <div className='register-meter__collection'>
                         <input type="text" placeholder="Meter Collection Name" className="meter-collection-name"/>
                         <div className='register-meter__count'>
-                            <input type='number' placeholder='Enter sub-meters count...'className='register-meter__meter-numbers' onChange={handleChange} />
+                            <button className='register-meter-btn' onClick={addFields} >Add new Sub-meter</button>
                         </div>
                         <div className='register-meter__name-percent'>
-                            {fields}
+                            {meter.map((val,idx)=>{
+                                const meterId = `meter-${idx}`;
+                                const percentageId = `percentage-${idx}`;
+                                return(
+                                    <div key={idx} className="register-field-row">
+                                        <input 
+                                            type='text' 
+                                            name={meterId} 
+                                            data-id={idx} 
+                                            className='meterName' 
+                                            placeholder="Meter Name"
+                                            value={meter[idx].meterName || ''} 
+                                            onChange={handleDynamicChange}
+                                        /> 
+                                        <input 
+                                            type='number' 
+                                            name={percentageId} 
+                                            data-id={idx} 
+                                            className='percentage' 
+                                            placeholder="Meter %"
+                                            value={meter[idx].percentage || ''}
+                                            onChange={handleDynamicChange}
+                                        /><span>%</span>
+                                        <span className='delete-meter' data-id ={idx} onClick={removeField}>X</span>
+                                    </div>
+                                )
+
+                            })}
                         </div>
-                        {numberOfMeter > 0 ?<button className=' save-btn'>Save</button>:null}
+                       <button className=' save-btn' onClick={handleSave}>Save</button>
                     </div>
                 </div>
             </div>

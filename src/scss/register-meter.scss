@@ -74,9 +74,9 @@
 .register-meter__count{
     background-color: rgba(30, 29, 39, 0.5);
     width: 30rem;
-    border-bottom: 1px solid transparent;
+    border: 1px solid transparent;
 }
-.register-meter__meter-numbers{
+.register-meter-btn{
     border: none;
     background-color: transparent;
     padding:1rem 2rem;
@@ -85,15 +85,25 @@
     font-size: 1.5rem;
     width: 100%;
     text-align: center;
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.653),
+                2px 2px 1px rgba(255, 255, 255, 0.653),
+                3px 3px 1px rgba(255, 255, 255, 0.653),
+                4px 4px 1px rgba(255, 255, 255, 0.653);
 
 }
-.register-meter__meter-numbers::placeholder{
-    color: rgba(147, 153, 179, 0.782);
-}
-.register-meter__count:focus,
-.register-meter__count:hover{
-    border-bottom: 1px solid #fff;
-}
+
+    .register-meter-btn:focus,
+    .register-meter-btn:hover{
+        background-color:  rgba(30, 29, 39, 0.9);
+    }
+    .register-meter-btn:active{
+        box-shadow:
+        1px 1px 1px rgba(255, 255, 255, 0.653),
+        2px 2px 2px rgba(255, 255, 255, 0.653);
+        transform: translate(2px ,2px);
+    }
+
+
 .register-meter__name-percent{
     display: flex;
     flex-direction: column;
@@ -111,6 +121,20 @@
     color: rgba(255, 255, 255, 0.653);
     font-size: 1.5rem;
     margin-left: 0.5rem;
+}
+span.delete-meter{
+    color: rgba(255, 0, 0, 0.544);
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid rgba(255, 0, 0, 0.544);
+    padding: 0 0.5rem;
+    align-self: center;
+    justify-self: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+span.delete-meter:hover{
+    background-color: red;
+    color:wheat
 }
 .register-field-row input[type='text']{
     width: 20rem;
