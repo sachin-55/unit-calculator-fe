@@ -4,6 +4,161 @@
     background-color: rgba(14, 80, 121, 0.551);
     background: radial-gradient(circle farthest-corner at top ,rgba(10,15,20,0.6) 40%,rgb(10, 5, 41) ),url('../images/beach-boat.jpg') center no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     min-height: 90vh;
     padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+.register-meter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(30, 29, 39, 0.32);
+    padding: 3rem 5rem;
+}
+.register-meter__title{
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    margin-left: -0.2rem;
+    line-height: 4rem;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+}
+.register-meter__info{
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 100;
+    letter-spacing: 0.1rem;
+    line-height: 2.5rem;
+    text-align: center;
+}
+.register-meter__collection{
+    margin-top: 2rem;
+    border: 1px solid black;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem;
+    transition: transform 0.3s;
+}
+.register-meter__collection:hover{
+    transform: scale(1.1) translateY(4.5%);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.meter-collection-name{
+    background-color: rgb(62, 81, 94);
+    border: 1px solid black;
+    padding: 1rem 3rem;
+    position: absolute;
+    top: -2rem;
+    color: white;
+    text-align: center;
+    outline: none;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+.meter-collection-name:hover{
+    background-color: gray;
+    color: darkslategray;
+}
+.meter-collection-name:focus{
+    background-color: rgb(183, 185, 189);
+    color: rgba(19, 38, 58, 0.912);
+}
+
+.register-meter__count{
+    background-color: rgba(30, 29, 39, 0.5);
+    width: 30rem;
+    border-bottom: 1px solid transparent;
+}
+.register-meter__meter-numbers{
+    border: none;
+    background-color: transparent;
+    padding:1rem 2rem;
+    outline: none;
+    color: #fff;
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+
+}
+.register-meter__meter-numbers::placeholder{
+    color: rgba(147, 153, 179, 0.782);
+}
+.register-meter__count:focus,
+.register-meter__count:hover{
+    border-bottom: 1px solid #fff;
+}
+.register-meter__name-percent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.register-field-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 1rem 0 0;
+}
+
+.register-field-row span{
+    color: rgba(255, 255, 255, 0.653);
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+}
+.register-field-row input[type='text']{
+    width: 20rem;
+    border: none;
+    background-color: rgba(30, 29, 39, 0.5);
+    padding: 0.5rem;
+    outline: none;
+    color: #fff;
+    font-size: 1.5rem;
+    border-bottom: 1px solid transparent;
+
+}
+.register-field-row input[type='number']{
+    width: 8rem;
+    font-size: 1.5rem;
+    border: none;
+    background-color: rgba(30, 29, 39, 0.5);
+    padding: 0.5rem;
+    outline: none;
+    color: #fff;
+    margin-left: 0.5rem;
+    border-bottom: 1px solid transparent;
+
+}
+.register-field-row input[type='text']:focus,
+.register-field-row input[type='number']:focus,
+.register-field-row input[type='text']:hover,
+.register-field-row input[type='number']:hover{
+    border-bottom: 1px solid #fff;
+}
+
+.save-btn{
+    background-color: transparent;
+    color: rgba(181, 172, 212, 0.83);
+    border: 1px solid  rgba(143, 138, 182, 0.5);
+    margin-top: 3rem;
+    padding: 1rem 5rem ;
+    transition: background-color 0.5s,color 0.5s;
+    outline: none;
+}
+.save-btn:focus,
+.save-btn:hover{
+    background-color: rgba(143, 138, 182, 0.5);
+    color: #000;
+    border: 1px solid  rgba(143, 138, 182, 0.3);
+}
+.save-btn:active{
+    background-color: rgba(143, 138, 182, 0.9);
+    color: #fff;
+
 }

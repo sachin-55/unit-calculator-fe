@@ -6,6 +6,7 @@
     width: 100%;
     background: radial-gradient(transparent 20%,rgba(0,0,0,0.2),rgba(0,0,0,0.5),rgba(0,0,0,0.7) 80%),url('../images/beach-boat.jpg') center no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
 .calculation{
     position: absolute;
