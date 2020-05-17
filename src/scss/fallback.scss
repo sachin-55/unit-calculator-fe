@@ -1,0 +1,37 @@
+@import '../scss/all.scss';
+
+.fallback{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(100, 109, 153);
+    background: radial-gradient(transparent,white,gray,black);
+    font-size: 5rem;
+    line-height: 100vh;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 1rem;
+    color:rgb(22, 70, 180);
+    text-shadow: 1px 1px 2px red,
+                2px 2px 2px yellow,
+                3px 3px 2px green,
+                4px 4px 2px blue,
+                5px 5px 2px brown,
+                6px 6px 2px black,
+                7px 7px 9px blue;
+    animation:blink 0.4s infinite ;
+}
+
+@keyframes blink{
+    0%{
+        text-shadow: none
+    }
+    100%{
+        text-shadow: 1px 1px 2px red,
+                2px 2px 2px yellow,
+                3px 3px 2px green,
+                4px 4px 2px blue,
+                5px 5px 2px brown,
+                6px 6px 2px black,
+                7px 7px 9px blue;
+    }
+}

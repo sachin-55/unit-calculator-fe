@@ -7,7 +7,7 @@ import {useHistory} from 'react-router-dom';
 const Login = ({backClick}) => {
     const history=useHistory()
     const handleLogin=()=>{
-        history.push('/dashboard')    
+        history.push('/home')    
     }
 
     return (

@@ -1,0 +1,9 @@
+@import './all.scss';
+
+.register-meter-wrapper{
+    background-color: rgba(14, 80, 121, 0.551);
+    background: radial-gradient(circle farthest-corner at top ,rgba(10,15,20,0.6) 40%,rgb(10, 5, 41) ),url('../images/beach-boat.jpg') center no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+    padding-top: 5rem;
+}
