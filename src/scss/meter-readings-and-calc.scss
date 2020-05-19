@@ -1,4 +1,6 @@
-
+:focus::placeholder{
+    opacity: 0;
+}
 .meter-readings-and-calculation{
     color: #fff;
 }
@@ -9,9 +11,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 5rem 1rem;
     box-sizing: border-box;
     width: 100%;
+}
+.meter-readings h1{
+    letter-spacing: 0.2rem;
+    font-size: 2rem;
+    border-bottom: 4px solid #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+
 }
 .meter-readings p{
     font-size: 1.5rem;
@@ -56,6 +67,7 @@
     font-size: 1.5rem;
     padding-left: 1rem;
     color: #f3f3f3;
+    text-align: center;
 }
 .meter-readings tbody input.previous {
     background-color: rgba(43, 58, 219, 0.361);
@@ -66,7 +78,8 @@
 }
 .meter-readings tbody input::placeholder{
     color: rgb(58, 49, 49);
-    text-transform: uppercase;
+    transition: opacity 0.5s;
+
 }
 .meter-readings tbody input:focus{
     color: #000;
@@ -90,7 +103,7 @@
 .meter-calculation h1{
     letter-spacing: 0.2rem;
     font-size: 2rem;
-    border-bottom: 1px solid #fff;
+    border-bottom: 4px solid #fff;
     font-weight: 500;
     text-transform: uppercase;
 }
@@ -101,8 +114,8 @@
 .meter-unit-price input{
     padding: 1rem 2rem;
     font-size: 1.5rem;
-    border:4px solid transparent;
-    border-bottom: 1px solid #fff;
+    border:0.5px double transparent;
+    border-bottom: 0.5px solid #fff;
     background-color:transparent;
     outline: none;
     color: #fff;
@@ -110,12 +123,75 @@
     transition: border 0.5s;
 }
 .meter-unit-price input:focus{
-    border:  4px double #fff;
+    border:  0.5px solid #fff;
 }
 .meter-unit-price input::placeholder{
     color: rgb(141, 141, 212);
+    transition: opacity 0.5s;
 }
 
 .each-meter-calculation{
-    
+    background-color: rgba(30, 29, 39, 0.714);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    margin-top: 3rem;
+    padding-bottom: 3rem;
+
+}
+.each-meter-calculation-row{
+    border-bottom: 1px solid white;
+    padding: 1rem 2rem;
+
+}
+.each-meter-calculation .meter-name{
+    padding-right: 2rem;
+    text-transform: uppercase;
+}
+.each-meter-calculation .meter-units{
+    padding-left: 3rem; 
+}
+.each-meter-calculation .meter-cost{
+    padding-left: 2rem; 
+}
+
+.divided-meter-calculation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(82, 82, 88, 0.544);
+    padding: 5rem 3rem;
+    margin-top: 5rem;
+}
+.divided-meter-calculation h1{
+    letter-spacing: 0.2rem;
+    font-size: 2rem;
+    border-bottom: 4px solid #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.number-of-user{
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+}
+.number-of-user input{
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border:0.5px double transparent;
+    border-bottom: 0.5px solid #fff;
+    background-color:transparent;
+    outline: none;
+    color: #fff;
+    width: 15rem;
+    transition: border 0.5s;
+}
+.number-of-user input:focus{
+    border:  0.5px solid #fff;
+}
+.number-of-user input::placeholder{
+    color: rgb(141, 141, 212);
+    transition: opacity 0.5s;
 }

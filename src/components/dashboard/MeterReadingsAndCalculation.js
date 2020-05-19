@@ -8,6 +8,7 @@ const MeterReadingsAndCalculation = ({meters}) => {
     return (
         <div className='meter-readings-and-calculation'>
              <div className="meter-readings">
+                 <h1>Meter Readings</h1>
                  <p>Enter respective previous month and current month sub-meter reading</p>
                  {meters !==''? 
                  <table>
@@ -55,7 +56,7 @@ const MeterReadingsAndCalculation = ({meters}) => {
                 <button className='save-btn save-readings-btn'>Submit</button>
              </div>
              <div className='meter-calculation'>
-                <h1>Calculate Cost</h1>
+                <h1>Units & Cost Calculated</h1>
                 <div className='meter-unit-price'>
                     <span>
                         Unit price :  (Rs.)
@@ -63,9 +64,30 @@ const MeterReadingsAndCalculation = ({meters}) => {
                     <input type='number' placeholder='Unit price'/>
                 </div>
                 <div className='each-meter-calculation'>
-                     
+                     {meters.map((value,index)=>{
+                         return(
+                                <div key={index} className='each-meter-calculation-row'>
+                                    <span className="meter-name">{ value.meterName} </span>
+                                    <span className="meter-units"> 123 units</span>
+                                    <span className="meter-cost"> Rs. 1230</span>
+
+
+                                </div>
+                         )
+                     })}
+                <button className='save-btn '>Submit</button>
+
                 </div>
              </div>
+            <div className="divided-meter-calculation">
+                <h1>Cost of Each of You</h1>
+                <div className='number-of-user'>
+                <span>
+                        Number of User's: 
+                    </span> 
+                    <input type='number' placeholder="No. of user's"/>
+                </div>
+            </div>
         </div>
     );
 }
