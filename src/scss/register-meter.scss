@@ -5,10 +5,12 @@
     background: radial-gradient(circle farthest-corner at top ,rgba(10,15,20,0.6) 40%,rgb(10, 5, 41) ),url('../images/beach-boat.jpg') center no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    min-height: 90vh;
+    min-height: 100vh;
+    height: auto;
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
+
 .register-meter{
     display: flex;
     flex-direction: column;
@@ -46,10 +48,7 @@
     padding:5rem 2rem;
     transition: transform 0.3s;
 }
-.register-meter__collection:hover{
-    transform: scale(1.1) translateY(4.5%);
-    background-color: rgba(0, 0, 0, 0.1);
-}
+
 .meter-collection-name{
     background-color: rgb(62, 81, 94);
     border: 1px solid black;
@@ -184,5 +183,5 @@ span.delete-meter:hover{
 .save-btn:active{
     background-color: rgba(143, 138, 182, 0.9);
     color: #fff;
-
 }
+

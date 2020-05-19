@@ -2,12 +2,12 @@ import React from 'react';
 import '../scss/login.scss'
 import { Box , Label,Input,Button} from 'theme-ui';
 import { FaArrowAltCircleLeft } from "react-icons/fa";
-import {useHistory} from 'react-router-dom';
+import {useHistory,Redirect} from 'react-router-dom';
 
 const Login = ({backClick}) => {
     const history=useHistory()
     const handleLogin=()=>{
-        history.push('/home')    
+        history.push('/home');
     }
 
     return (

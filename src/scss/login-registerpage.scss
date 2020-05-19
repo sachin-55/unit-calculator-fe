@@ -1,30 +1,9 @@
-*::after{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
+@import './all.scss';
 
-html{
-    font-size: 10px;
-    color: #000;
-    scroll-behavior: smooth;
-}
-body{
-    overflow: hidden;
-}
-.link-items{
-    text-decoration: none;
-}
 .background-wrapper{
     background: linear-gradient(to right,rgba(7, 53, 7, 0.5),rgba(7, 53, 7, 0.5)),url('https://setopati.net/wp-content/uploads/2018/12/electricity.jpg') center no-repeat;
     height: 100vh;
     background-size: cover;
-}
-.container{
-    width: 100%;
-    max-width: 122em;
-    margin: 0 auto;
-    padding: 0 2rem;
 }
 
 

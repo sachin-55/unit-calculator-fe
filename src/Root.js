@@ -36,7 +36,6 @@ const Root = ()=>{
                         <Route render={()=><h1>Not Found</h1>}/>
 
                     </Switch>
-
                 </Router>
             </React.Suspense>
         </ThemeProvider>

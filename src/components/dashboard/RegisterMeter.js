@@ -1,16 +1,23 @@
 import React from 'react';
 import '../../scss/register-meter.scss';
+import MeterReadingsAndCalculation from './MeterReadingsAndCalculation';
 
-const meterInitial={
-        meterName:'',
-        percentage:'100'
-    }
+
 
 const RegisterMeter = () => {
+    const [meterNumber,setMeterNumber] = React.useState(1);
+
+    const meterInitial={
+        meterName:`meter-${meterNumber}`,
+        // percentage:'100'
+    }
+
     const [meter,setMeter] = React.useState([{...meterInitial}]);
 
     const addFields = ()=>{
-        setMeter([...meter,{ ...meterInitial}]);
+        setMeterNumber((meterNumber)=>meterNumber+1);
+        
+        setMeter([...meter,{ meterName:`meter-${meterNumber+1}` }]);
     }
     const removeField = (e)=>{
         const updatedMeter = [...meter];
@@ -37,13 +44,13 @@ const RegisterMeter = () => {
                     </div>
                     <div className="register-meter__info">
                         <p>How many meters are used ?<br/> Register required number of sub-meter and also the percentage shared if specific meter is shared between others members. Also specify meter name for easy identification. </p>
-                        <div className='example'>
+                        {/* <div className='example'>
                             <button>For Example</button>
                             <div className='example-picture'>
 
                             </div>
 
-                        </div>
+                        </div> */}
                     </div>
                     <div className='register-meter__collection'>
                         <input type="text" placeholder="Meter Collection Name" className="meter-collection-name"/>
@@ -65,7 +72,7 @@ const RegisterMeter = () => {
                                             value={meter[idx].meterName || ''} 
                                             onChange={handleDynamicChange}
                                         /> 
-                                        <input 
+                                        {/* <input 
                                             type='number' 
                                             name={percentageId} 
                                             data-id={idx} 
@@ -73,16 +80,17 @@ const RegisterMeter = () => {
                                             placeholder="Meter %"
                                             value={meter[idx].percentage || ''}
                                             onChange={handleDynamicChange}
-                                        /><span>%</span>
+                                        /><span>%</span> */}
                                         <span className='delete-meter' data-id ={idx} onClick={removeField}>X</span>
                                     </div>
                                 )
 
                             })}
                         </div>
-                       <button className=' save-btn' onClick={handleSave}>Save</button>
+                       <button className=' save-btn' onClick={handleSave}>Submit</button>
                     </div>
                 </div>
+                <MeterReadingsAndCalculation meters={meter}/>
             </div>
         </div>
     );

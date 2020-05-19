@@ -3,6 +3,7 @@ import '../scss/login-registerpage.scss';
 import Login from "../components/Login";
 import Register from '../components/Register';
 import { Button } from 'theme-ui';
+import Navbar from '../components/dashboard/Navbar';
 
 const LoginRegisterPage = () => {
     const [animateLogin,setAnimateLogin]=React.useState('');
@@ -42,6 +43,7 @@ const LoginRegisterPage = () => {
 
     return (
         <div className='background-wrapper'>
+                <Navbar toggle='false'/>
             <div className='container'>
                 <div className={`box ${animationForBox}`}>
                     <div className='login-register plane'>

@@ -22,11 +22,12 @@ const Navbar= (props) => {
                                     <span className="dash__word second-word">Calculator</span>
                                 </div>
                                 </Link>
-                            <div className='menu-toggler' onClick={toggleMenu}>
+                           {props.toggle !== 'false'? <div className='menu-toggler' onClick={toggleMenu}>
                                 <span className="menu-toggle cross">X</span>
                                 <span className="menu-toggle pipe">|||</span>
 
                             </div>
+                                :null}
                             <div className='nav-list'>
                                 <Link to='/home' className='link-items'>
                                     <div className='nav-items'>Home</div>

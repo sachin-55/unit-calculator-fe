@@ -1,0 +1,121 @@
+
+.meter-readings-and-calculation{
+    color: #fff;
+}
+// Meter readings and table
+.meter-readings{
+    background-color: rgba(82, 82, 88, 0.544);
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 1rem;
+    box-sizing: border-box;
+    width: 100%;
+}
+.meter-readings p{
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+    line-height: 2rem;
+    text-align: center;
+    padding: 0 0 1rem ;
+
+}
+.meter-readings table{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width:75%;
+    margin: 0 auto;
+
+   
+}
+.meter-readings table th,td{
+    text-align:center;
+}
+.meter-readings thead th{
+    padding: 0.5rem 1.5rem;
+    font-size: 1.5rem;
+    background-color: rgb(34, 10, 131);
+}
+.meter-readings tbody td{
+    background-color: rgb(123, 132, 158);
+    color:#000;
+    font-size: 1.2rem;
+    vertical-align: middle;
+    border-bottom: 1px dotted #474343;
+    text-transform: uppercase;
+    height: 3rem;
+    width: 10rem;
+    padding-left: 0.3rem;
+}
+.meter-readings tbody input{
+    width: 100%;
+    height: 90%;
+    border: none;
+    background-color: pink;
+    font-size: 1.5rem;
+    padding-left: 1rem;
+    color: #f3f3f3;
+}
+.meter-readings tbody input.previous {
+    background-color: rgba(43, 58, 219, 0.361);
+}
+
+.meter-readings tbody input.current {
+    background-color: rgba(43, 58, 219, 0.286);
+}
+.meter-readings tbody input::placeholder{
+    color: rgb(58, 49, 49);
+    text-transform: uppercase;
+}
+.meter-readings tbody input:focus{
+    color: #000;
+    background-color: #fff;
+}
+
+.save-readings-btn{
+    width: 35%;
+    margin: 3rem auto 0;
+}
+
+// Meter calculation
+.meter-calculation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(30, 29, 39, 0.32);
+    padding: 5rem 3rem;
+    margin-top: 5rem;
+}
+.meter-calculation h1{
+    letter-spacing: 0.2rem;
+    font-size: 2rem;
+    border-bottom: 1px solid #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.meter-unit-price{
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+}
+.meter-unit-price input{
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border:4px solid transparent;
+    border-bottom: 1px solid #fff;
+    background-color:transparent;
+    outline: none;
+    color: #fff;
+    width: 15rem;
+    transition: border 0.5s;
+}
+.meter-unit-price input:focus{
+    border:  4px double #fff;
+}
+.meter-unit-price input::placeholder{
+    color: rgb(141, 141, 212);
+}
+
+.each-meter-calculation{
+    
+}
