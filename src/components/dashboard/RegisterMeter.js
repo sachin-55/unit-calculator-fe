@@ -6,10 +6,14 @@ import MeterReadingsAndCalculation from './MeterReadingsAndCalculation';
 
 const RegisterMeter = () => {
     const [meterNumber,setMeterNumber] = React.useState(1);
+    const [meterCollectionName,setMeterCollectionName] = React.useState('');
 
     const meterInitial={
         meterName:`meter-${meterNumber}`,
-        // percentage:'100'
+       previous:0,
+       current:0,
+       units:0,
+       cost:0
     }
 
     const [meter,setMeter] = React.useState([{...meterInitial}]);
@@ -17,7 +21,12 @@ const RegisterMeter = () => {
     const addFields = ()=>{
         setMeterNumber((meterNumber)=>meterNumber+1);
         
-        setMeter([...meter,{ meterName:`meter-${meterNumber+1}` }]);
+        setMeter([...meter,{ meterName:`meter-${meterNumber+1}`,
+                                previous:0,
+                                current:0,
+                                units:0,
+                                cost:0 }
+                            ]);
     }
     const removeField = (e)=>{
         const updatedMeter = [...meter];
@@ -32,7 +41,9 @@ const RegisterMeter = () => {
 
     const handleSave=()=>{
         console.log('save');
+        console.log(meterCollectionName);
         console.log(meter);
+        
     }
 
     return (
@@ -53,7 +64,7 @@ const RegisterMeter = () => {
                         </div> */}
                     </div>
                     <div className='register-meter__collection'>
-                        <input type="text" placeholder="Meter Collection Name" className="meter-collection-name"/>
+                        <input type="text" placeholder="Meter Collection Name" onChange={(e)=>{setMeterCollectionName(e.target.value)}} className="meter-collection-name"/>
                         <div className='register-meter__count'>
                             <button className='register-meter-btn' onClick={addFields} >Add new Sub-meter</button>
                         </div>
@@ -90,7 +101,7 @@ const RegisterMeter = () => {
                        <button className=' save-btn' onClick={handleSave}>Submit</button>
                     </div>
                 </div>
-                <MeterReadingsAndCalculation meters={meter}/>
+                <MeterReadingsAndCalculation meters={meter} updatedMeter={setMeter}/>
             </div>
         </div>
     );

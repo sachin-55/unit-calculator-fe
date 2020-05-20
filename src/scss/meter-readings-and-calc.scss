@@ -129,7 +129,11 @@
     color: rgb(141, 141, 212);
     transition: opacity 0.5s;
 }
-
+.default-unit-price{
+    font-size: 2rem;
+    vertical-align: middle;
+    color: rgb(184, 52, 52);
+}
 .each-meter-calculation{
     background-color: rgba(30, 29, 39, 0.714);
     display: flex;
@@ -146,6 +150,7 @@
     padding: 1rem 2rem;
 
 }
+
 .each-meter-calculation .meter-name{
     padding-right: 2rem;
     text-transform: uppercase;
@@ -156,6 +161,15 @@
 .each-meter-calculation .meter-cost{
     padding-left: 2rem; 
 }
+.each-meter-calculation-row.total{
+    background-color: White;
+    width: 90%;
+    color: #000;
+    margin-top: -1px;
+    text-align: center;
+
+}
+
 
 .divided-meter-calculation{
     display: flex;

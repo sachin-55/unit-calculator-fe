@@ -1,10 +1,54 @@
 import React from 'react';
 import '../../scss/meter-readings-and-calc.scss';
 
-const MeterReadingsAndCalculation = ({meters}) => {
-    const [subMeters,setSubMeters] = React.useState('');
-
+const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
   
+    const [unitPrice,setUnitPrice] = React.useState(10);
+    const [totalCost,setTotalCost] = React.useState(0);
+    const [totalUnits,setTotalUnits] = React.useState(0);
+
+
+    const handleReadingsChange = (e)=>{
+        const updatedMeters = [...meters];
+        updatedMeters[e.target.dataset.id][e.target.className] = e.target.value;
+        updatedMeter(updatedMeters);
+    }
+
+    const handleCalculation = (e)=>{
+        setUnitPrice(e.target.value);
+        let total=0;
+        let unit =e.target.value;
+     
+        const updatedMeters = [...meters];
+        updatedMeters.forEach((meter,index)=>{
+            let cost;
+                 cost = parseInt(meter.units) * parseFloat(unit);
+                 if(!Number.isNaN(cost)){
+                    updatedMeters[index].cost = cost;
+                    total +=cost;
+                }
+        })
+        
+        setTotalCost(total);
+        updatedMeter(updatedMeters);
+
+    }
+
+    const handleMeterReadings=()=>{
+        
+        const updatedMeters = [...meters];
+        let total = 0;
+        updatedMeters.forEach((meter,index)=>{
+            let unit;
+                 unit = parseInt(meter.current) - parseInt(meter.previous);
+                 if(!Number.isNaN(unit)){
+                    updatedMeters[index].units = unit;
+                    total += unit;
+                }
+        })
+        setTotalUnits(total)
+        updatedMeter(updatedMeters);
+    }
     return (
         <div className='meter-readings-and-calculation'>
              <div className="meter-readings">
@@ -38,7 +82,9 @@ const MeterReadingsAndCalculation = ({meters}) => {
                                     className='previous' 
                                     data-id={index}  
                                     name={`previous-${index}`} 
-                                    placeholder={`${value.meterName} `}/>
+                                    placeholder={`${value.meterName} `}
+                                    value={value.previous || ''}
+                                    onChange={handleReadingsChange}/>
                                 </td>
                                 <td>
                                 <input 
@@ -46,6 +92,8 @@ const MeterReadingsAndCalculation = ({meters}) => {
                                     className='current' 
                                     data-id={index}  
                                     name={`current-${index}`} 
+                                    value={value.current || ''}
+                                    onChange={handleReadingsChange}
                                     placeholder={`${value.meterName} `}/>
                                 </td>
                             </tr>
@@ -53,30 +101,39 @@ const MeterReadingsAndCalculation = ({meters}) => {
                      })}
                      </tbody>
                  </table>:null}
-                <button className='save-btn save-readings-btn'>Submit</button>
+                <button className=' save-btn save-readings-btn' onClick={handleMeterReadings}>Submit</button>
              </div>
              <div className='meter-calculation'>
-                <h1>Units & Cost Calculated</h1>
-                <div className='meter-unit-price'>
-                    <span>
-                        Unit price :  (Rs.)
-                    </span> 
-                    <input type='number' placeholder='Unit price'/>
-                </div>
-                <div className='each-meter-calculation'>
-                     {meters.map((value,index)=>{
-                         return(
+                    <h1>Units & Cost Calculated</h1>
+                    <div className='meter-unit-price'>
+                        <span>
+                            Unit price :  (Rs.)
+                        </span> 
+                        <input type='number' placeholder='Unit price' onChange={handleCalculation}/>
+                    </div>
+                    <div><span className="default-unit-price">* </span>Default Unit Price is Rs.10</div>
+                    <button className='save-btn ' value={unitPrice} onClick={handleCalculation}>Calculate Cost</button>
+                    <div className='each-meter-calculation'>
+                        <div  className='each-meter-calculation-row'>
+                            <span className="meter-name">Meter Name </span>
+                            <span className="meter-units"> Units</span>
+                            <span className="meter-cost">Cost</span>
+                        </div>
+                    {meters.map((value,index)=>{
+                        return(
+
                                 <div key={index} className='each-meter-calculation-row'>
                                     <span className="meter-name">{ value.meterName} </span>
-                                    <span className="meter-units"> 123 units</span>
-                                    <span className="meter-cost"> Rs. 1230</span>
-
-
+                                    <span className="meter-units"> {value.units}</span>
+                                    <span className="meter-cost">Rs.  {value.cost}</span>
                                 </div>
-                         )
-                     })}
-                <button className='save-btn '>Submit</button>
-
+                        )
+                    })}
+                      <div  className='each-meter-calculation-row total'>
+                            <span className="meter-name">Total </span>
+                            <span className="meter-units"> {totalUnits} </span>
+                            <span className="meter-cost">Rs. {totalCost}</span>
+                        </div>
                 </div>
              </div>
             <div className="divided-meter-calculation">
