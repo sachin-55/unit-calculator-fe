@@ -6,7 +6,8 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
     const [unitPrice,setUnitPrice] = React.useState(10);
     const [totalCost,setTotalCost] = React.useState(0);
     const [totalUnits,setTotalUnits] = React.useState(0);
-
+    const [divideStatus,setDivideStatus] = React.useState(false);
+    const [divisionCount, setDivisionCount] = React.useState(1);
 
     const handleReadingsChange = (e)=>{
         const updatedMeters = [...meters];
@@ -49,6 +50,21 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
         setTotalUnits(total)
         updatedMeter(updatedMeters);
     }
+
+    const handleCheckBox =(e)=>{
+        if(e.target.checked){
+            setDivideStatus(true);
+        }else{
+            setDivideStatus(false);
+        }
+    }
+
+    const handleCalculationDivision=()=>{
+        const tempMeters = [...meters];
+        
+    }
+
+
     return (
         <div className='meter-readings-and-calculation'>
              <div className="meter-readings">
@@ -136,15 +152,27 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
                         </div>
                 </div>
              </div>
-            <div className="divided-meter-calculation">
+             <div className='divide-status-checkbox'>
+                 <h1>Divide sub-meters</h1>
+                 <p>If you have to divide above calculation click on below button</p>
+                    <label for='checkbox-divide' className='checkbox-divide'>
+                        <input type='checkbox' id='checkbox-divide' className='checkbox-input' onChange={handleCheckBox}/>
+                        <span className='checkbox-box'></span>
+                    </label>
+                    {divideStatus === true ? <div className="divided-meter-calculation">
                 <h1>Cost of Each of You</h1>
                 <div className='number-of-user'>
                 <span>
                         Number of User's: 
                     </span> 
-                    <input type='number' placeholder="No. of user's"/>
+                    <input type='number' placeholder="No. of user's" value={divisionCount}  onChange={(e)=>setDivisionCount(e.target.value)}/>
                 </div>
+                <button className='save-btn' onClick={handleCalculationDivision}>Divide</button>
             </div>
+            :null}
+             </div>
+
+         
         </div>
     );
 }

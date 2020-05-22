@@ -22,14 +22,21 @@ body{
     padding: 0 2rem;
 }
 body::-webkit-scrollbar{
-    width: 0.5rem;
+    width: 0.8rem;
 }
 body::-webkit-scrollbar-track{
     background-color: #f1f1f1;
 }
 body::-webkit-scrollbar-thumb{
-    background-color: rgba(16, 16, 65, 0.823);
+    background-color: rgba(68, 68, 110, 0.823);
+    background: radial-gradient(#fff,#0000ff,#fff);
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 3px #fff;
+}
+body::-webkit-scrollbar-thumb:hover{
+    background: radial-gradient(rgb(221, 224, 22),#fff,#0000ff,#fff);
+
 }
 body::-webkit-scrollbar-track-piece{
-    background: rgb(60, 119, 161);
+    background: rgb(40, 61, 77);
 }
