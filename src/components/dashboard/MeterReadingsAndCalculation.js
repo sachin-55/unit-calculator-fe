@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../scss/meter-readings-and-calc.scss';
+import Modal from '../modal';
 
 const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
   
@@ -8,6 +9,7 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
     const [totalUnits,setTotalUnits] = React.useState(0);
     const [divideStatus,setDivideStatus] = React.useState(false);
     const [divisionCount, setDivisionCount] = React.useState(1);
+    const [showDivisionModal,setShowDivisionModal] = React.useState(true);
 
     const handleReadingsChange = (e)=>{
         const updatedMeters = [...meters];
@@ -18,6 +20,7 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
     const handleCalculation = (e)=>{
         setUnitPrice(e.target.value);
         let total=0;
+        let totalU = 0;
         let unit =e.target.value;
      
         const updatedMeters = [...meters];
@@ -27,10 +30,12 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
                  if(!Number.isNaN(cost)){
                     updatedMeters[index].cost = cost;
                     total +=cost;
+                    totalU += updatedMeters[index].units;
                 }
         })
         
         setTotalCost(total);
+        setTotalUnits(totalU)
         updatedMeter(updatedMeters);
 
     }
@@ -39,15 +44,20 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
         
         const updatedMeters = [...meters];
         let total = 0;
+        let totalC=0;
         updatedMeters.forEach((meter,index)=>{
             let unit;
                  unit = parseInt(meter.current) - parseInt(meter.previous);
+                 const costss = unit * 10;
                  if(!Number.isNaN(unit)){
                     updatedMeters[index].units = unit;
+                    updatedMeters[index].cost = costss;
                     total += unit;
+                    totalC += costss;
                 }
         })
-        setTotalUnits(total)
+        setTotalUnits(total);
+        setTotalCost(totalC);
         updatedMeter(updatedMeters);
     }
 
@@ -64,6 +74,9 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
         
     }
 
+    const toggleDivisionModal=()=>{
+        setShowDivisionModal((showDivisionModal)=>  showDivisionModal === true? false:true);
+    }
 
     return (
         <div className='meter-readings-and-calculation'>
@@ -167,12 +180,16 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
                     </span> 
                     <input type='number' placeholder="No. of user's" value={divisionCount}  onChange={(e)=>setDivisionCount(e.target.value)}/>
                 </div>
-                <button className='save-btn' onClick={handleCalculationDivision}>Divide</button>
+                <button className='save-btn' onClick={toggleDivisionModal}>Divide</button>
             </div>
             :null}
              </div>
+                <Modal  
+                showModal = {showDivisionModal} 
+                toggleModal={toggleDivisionModal} 
+                allMeters={meters}
+                divisionCount = {divisionCount} />
 
-         
         </div>
     );
 }

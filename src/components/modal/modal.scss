@@ -1,0 +1,112 @@
+@import '../../scss/all.scss';
+
+.modal{
+    position: absolute;
+    bottom: 0rem;
+    width: 100%;
+    left: 0;
+    z-index: 3000;
+    display: none;
+}
+
+.open-modal{
+  display: block;
+}
+.modal-title{
+    position: relative;
+    background-color: rgba(3, 12, 43, 0.871);
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    font-size:2rem ;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    margin-right: -0.2rem;
+    width: 100%;
+}
+.modal-title span{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: transparent;
+    background-color: rgba(226, 36, 36, 0.66);
+    padding: 1rem 0.5rem;
+    cursor: pointer;
+    
+}
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(79, 118, 129);
+    padding-bottom: 5rem;
+
+}
+.modal-body h1{
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 1px #000;
+    border-bottom: 0.3rem solid #fff;
+    margin: 3rem 0;
+    padding: 0 1rem;
+    letter-spacing: 0.2rem;
+    margin-right: -0.2rem;
+
+}
+
+.sub-meters-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(13, 65, 80);
+    padding: 2rem 0.5rem;
+    border-bottom: 0.2rem dotted rgb(233, 227, 227);
+
+}
+.sub-meters-user input[type="text"]{
+    border: none;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    padding: 1rem;
+    font-size: 1.9rem;
+    width: 100%;
+    outline: none;
+    transition: 0.3s;
+}
+.sub-meters-user input[type="text"]:focus{
+    border-left:  3px solid rgb(223, 138, 48);
+    border-right:  3px solid rgb(223, 138, 48);
+
+}
+.meter-name-percentage{
+    background:rgb(80, 90, 90);
+    padding: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+}
+.meter-name-percentage select{
+    border: 1px solid #fff;
+    background: none;
+    padding:0.5rem  1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    outline: none;
+    width: 20rem;
+}
+.meter-name-percentage select option{
+    background-color: rgb(50, 190, 113);
+    color: rgb(126, 51, 51);
+    font-size: 1.5rem;
+}
+.meter-name-percentage input[type='number']{
+    width: 5rem;
+    margin:0 0 0 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.meter-name-percentage .percentage{
+    font-size: 1.8rem;
+    padding: 1px;
+}
