@@ -143,32 +143,55 @@
     justify-content: space-between;
     font-size: 1.4rem;
     margin-top: 3rem;
-    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    width: 90%;
 
 }
 .each-meter-calculation-row{
+    width: 100%;
     border-bottom: 1px solid white;
-    padding: 1rem 2rem;
-
+    padding: 1rem 2rem ;
+    display: flex;
+    justify-content: space-between;
 }
+    .each-meter-calculation-row:nth-child(2n+1){
+        background-color: rgba(59, 59, 90,0.3);
+        color: lightskyblue;
+    }
+    .each-meter-calculation-row:nth-child(2n){
+        background-color: rgba(41, 59, 77,0.3);
+        color: lightsteelblue;
+    }
+    .each-meter-calculation-row:first-child{
+        background-color: rgb(29, 52, 83);
+        color: #fff;
+    }
+
 
 .each-meter-calculation .meter-name{
-    padding-right: 2rem;
     text-transform: uppercase;
+    text-align: left;
+    flex: 2 10rem;
 }
 .each-meter-calculation .meter-units{
     padding-left: 3rem; 
+    flex: 1 10rem;
+
 }
 .each-meter-calculation .meter-cost{
     padding-left: 2rem; 
+    flex: 1 10rem;
+
 }
 .each-meter-calculation-row.total{
-    background-color: White;
-    width: 90%;
-    color: #000;
-    margin-top: -1px;
-    text-align: center;
-
+    background-color: rgb(97, 129, 148);
+    color: rgb(247, 243, 243);
+    text-align: left;
+    text-decoration: underline;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-right: -1px;
+    font-size: 1.6rem;
 }
 // Divide Meter Calculation-----------------------------------------------------
 
@@ -200,17 +223,17 @@
 .checkbox-box{
     cursor: pointer;
     padding: 1.5rem 3rem;
-    background-color: rgb(202, 95, 95);
+    background-color:green ;
     border: 1px solid #fff;
     position: relative;
     top: 1rem;
     border-radius: 5rem;
     transition: background-color 0.3s;
-
+    top: 3rem;
 }
 .checkbox-box::before{
     position: absolute;
-    content: 'Division Disable';
+    content: 'Enable Division';
     top: 0;
     left: 0;
     display: inline-block;
@@ -220,10 +243,10 @@
 }
 
 .checkbox-input:checked + .checkbox-box{
-    background-color: green;
+    background-color: rgb(202, 95, 95);
 }
 .checkbox-input:checked + .checkbox-box::before{
-    content: 'Division Enable';
+    content: 'Disable Division';
     font-weight: 800;
 
 }
@@ -268,3 +291,7 @@
     transition: opacity 0.5s;
 }
 
+.save-btn:disabled{
+    background-color: rgb(143, 124, 124);
+    color: rgb(66, 58, 59);
+}

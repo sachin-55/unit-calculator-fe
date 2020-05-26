@@ -1,12 +1,35 @@
 @import '../../scss/all.scss';
 
+
+.modal::-webkit-scrollbar{
+    width: 0.5rem;
+}
+.modal::-webkit-scrollbar-thumb{
+    background-color: rgba(68, 68, 110, 0.823);
+    background: radial-gradient(rgb(20, 18, 18),#b9675c,#fff);
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 3px #fff;
+}
+.modal::-webkit-scrollbar-thumb:hover{
+    background: radial-gradient(rgb(224, 22, 22),#fff);
+}
+.modal::-webkit-scrollbar-track-piece{
+    background: rgb(38, 72, 99);
+}
+
+
+/////////////////////////////////////////////////
+
 .modal{
-    position: absolute;
-    bottom: 0rem;
+    position: fixed;
+    top: 0rem;
     width: 100%;
     left: 0;
     z-index: 3000;
     display: none;
+    overflow-y: scroll;
+    max-height: 100%;
+    padding: 5rem 0;
 }
 
 .open-modal{
@@ -14,34 +37,99 @@
 }
 .modal-title{
     position: relative;
-    background-color: rgba(3, 12, 43, 0.871);
-    color: #fff;
+    background-color: rgb(3, 12, 43);
+    background: linear-gradient(to bottom, black,blue,black);
+    color: rgb(173, 170, 206);
     text-align: center;
     padding: 1rem 0;
-    font-size:2rem ;
+    font-size:3rem ;
     font-weight: 700;
     letter-spacing: 0.2rem;
     margin-right: -0.2rem;
-    width: 100%;
+    width: 102%;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+
+    text-shadow: 1px 0px 1px black;
 }
+    .modal-title:hover{
+        animation: background-shift linear 2s infinite;
+    }
+    @keyframes background-shift{
+        0%{
+            background-position: 130px 130px;
+        }
+        100%{
+            background-position: 0px 0px;
+        }
+    }
+
+
+    .modal-title::before{
+        position: absolute;
+        top: 0;
+        left: -1rem;
+        content: "";
+        width: 2rem;
+        height: 100%;
+        background-color: red;
+        background: radial-gradient( ellipse at right , blue ,black 70%);
+        border-radius: 40%;
+    }
+        .modal-title:hover::before{
+            animation: background-before-shift linear 2s infinite;
+        }
+        @keyframes background-before-shift{
+            0%{
+                background-position: 0px 130px;
+            }
+            100%{
+                background-position: 0px 0px;
+
+            }
+        }
 .modal-title span{
     position: absolute;
     top: 50%;
     right: 0;
+    border-top-right-radius: 0.6rem;
+    border-bottom-right-radius: 0.6rem;
     transform: translateY(-50%);
     background: transparent;
-    background-color: rgba(226, 36, 36, 0.66);
-    padding: 1rem 0.5rem;
+    background-color:transparent;
+    // background: linear-gradient(to bottom, black,blue,black);
+    padding: 1rem 1.5rem;
     cursor: pointer;
-    
+    font-size: 3rem;
+    font-weight: 100;
+    height: 100%;
+    color: rgb(105, 11, 11);
 }
+  
+
+
+    .modal-title span:hover p{
+     animation: spin linear 2s infinite both;
+    }
+    @keyframes spin{
+        0%{
+            transform: rotate(0deg) scale(1);
+        }
+        50%{
+            transform: rotate(180deg) scale(0.5);
+        }
+        100%{
+            transform: rotate(359deg) scale(1);
+        }
+    }
 .modal-body{
     display: flex;
     flex-direction: column;
     align-items: center;
     background: rgb(79, 118, 129);
     padding-bottom: 5rem;
-
+    background:repeating-radial-gradient(circle at top,rgb(2, 16, 70) ,transparent 80%);
+    background-size: 3px 3px;
 }
 .modal-body h1{
     font-size: 2.5rem;
@@ -51,6 +139,7 @@
     padding: 0 1rem;
     letter-spacing: 0.2rem;
     margin-right: -0.2rem;
+    
 
 }
 
@@ -59,8 +148,8 @@
     flex-direction: column;
     align-items: center;
     background: rgb(13, 65, 80);
-    padding: 2rem 0.5rem;
-    border-bottom: 0.2rem dotted rgb(233, 227, 227);
+    padding: 2rem 0.5rem 0;
+    margin: 1rem 0;
 
 }
 .sub-meters-user input[type="text"]{
@@ -73,11 +162,14 @@
     outline: none;
     transition: 0.3s;
 }
-.sub-meters-user input[type="text"]:focus{
-    border-left:  3px solid rgb(223, 138, 48);
-    border-right:  3px solid rgb(223, 138, 48);
-
-}
+    .sub-meters-user input[type="text"]:hover{
+        border-left:  3px solid gray;
+        border-right:  3px solid gray;
+    }
+    .sub-meters-user input[type="text"]:focus{
+        border-left:  3px solid rgb(223, 138, 48);
+        border-right:  3px solid rgb(223, 138, 48);
+    }
 .meter-name-percentage{
     background:rgb(80, 90, 90);
     padding: 0.5rem;
@@ -110,3 +202,119 @@
     font-size: 1.8rem;
     padding: 1px;
 }
+.add-submeter-btn,
+.calculate-division{
+    box-sizing: border-box;
+    border:none;
+    margin: 3rem 0;
+    padding: 1rem 3rem;
+    background:rgb(80, 90, 90);
+    color: #fff;
+    font-weight: 100;
+    cursor: pointer;
+    transition:box-shadow 0.3s,transform 0.3s;
+    outline: none;
+    border: 1px solid lightgray;
+}
+.add-submeter-btn:hover,
+.calculate-division:hover{
+    box-shadow: 1px 1px 1px black,
+                2px 2px 1px black,
+                3px 3px 1px black,
+                4px 4px 1px black;
+}
+.add-submeter-btn:active,
+.calculate-division:active{
+    box-shadow: 1px 1px 1px black;
+    transform: translate(3px, 3px);
+}
+//Division-result-------------------------------
+.division-result{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.135);
+    padding: 1rem ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.division-result h2{
+    font-size: 5rem;
+    line-height: 5rem;
+    font-weight: 800;
+    letter-spacing: 0.2rem;
+    border-bottom: 5px solid #ccccfc;
+    padding: 0 2rem;
+    text-shadow: -1px -1px 10px  #000;
+    color: #ccccfc;
+}
+.totals{
+    background: #0008;
+    color: #c3c3c3;
+    padding: 1rem;
+    margin: 1rem 0 0;
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+}
+.results-wrapper{
+    width: 90%;
+    text-align: center;
+}
+span.username{
+    display: inline-block;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    text-shadow: -1px -1px 0.5px rgb(137, 153, 233);
+    border-bottom: 1px solid #fff;
+    padding: 0  1rem;
+    margin: 0 0 1rem;
+}
+.result{
+    margin: 1.5rem 0;
+    background-color: #0009;
+    padding: 1.5rem 1rem;
+}
+.result .each-user-meter-calculation-row:first-of-type{
+    background-color: black;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.result .each-user-meter-calculation-row:last-of-type{
+    background-color: white;
+    color: #000;
+    font-size: 1.5rem;
+    text-shadow: -1px -1px 0.5px #000;
+
+}
+.each-user-meter-calculation-row{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 1.2rem;
+    background-color: #0005;
+    color: #fff;
+    padding: 0.5rem 0;
+    border-bottom: 0.5px solid #fff4;
+}
+
+.each-user-meter-calculation-row .meter-name{
+    text-transform: uppercase;
+    flex: 5 10rem;
+}
+.each-user-meter-calculation-row .meter-percentage{
+    text-transform: uppercase;
+    flex: 1 10rem;
+    padding-left: 1rem; 
+
+}
+.each-user-meter-calculation-row .meter-units{
+    padding-left: 1rem; 
+    flex: 1 10rem;
+
+}
+.each-user-meter-calculation-row .meter-cost{
+    padding-left: 1rem; 
+    flex: 1 10rem;
+}
+

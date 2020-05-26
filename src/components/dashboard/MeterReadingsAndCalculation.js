@@ -2,15 +2,18 @@ import React from 'react';
 import '../../scss/meter-readings-and-calc.scss';
 import Modal from '../modal';
 
-const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
+const MeterReadingsAndCalculation = ({meterCollectionName,meters,updatedMeter}) => {
   
     const [unitPrice,setUnitPrice] = React.useState(10);
     const [totalCost,setTotalCost] = React.useState(0);
     const [totalUnits,setTotalUnits] = React.useState(0);
     const [divideStatus,setDivideStatus] = React.useState(false);
-    const [divisionCount, setDivisionCount] = React.useState(1);
-    const [showDivisionModal,setShowDivisionModal] = React.useState(true);
-
+    const [divisionCount, setDivisionCount] = React.useState(2);
+    const [showDivisionModal,setShowDivisionModal] = React.useState(false);
+    const total = {
+        totalCost,
+        totalUnits
+    }
     const handleReadingsChange = (e)=>{
         const updatedMeters = [...meters];
         updatedMeters[e.target.dataset.id][e.target.className] = e.target.value;
@@ -168,7 +171,7 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
              <div className='divide-status-checkbox'>
                  <h1>Divide sub-meters</h1>
                  <p>If you have to divide above calculation click on below button</p>
-                    <label for='checkbox-divide' className='checkbox-divide'>
+                    <label htmlFor='checkbox-divide' className='checkbox-divide'>
                         <input type='checkbox' id='checkbox-divide' className='checkbox-input' onChange={handleCheckBox}/>
                         <span className='checkbox-box'></span>
                     </label>
@@ -180,15 +183,21 @@ const MeterReadingsAndCalculation = ({meters,updatedMeter}) => {
                     </span> 
                     <input type='number' placeholder="No. of user's" value={divisionCount}  onChange={(e)=>setDivisionCount(e.target.value)}/>
                 </div>
-                <button className='save-btn' onClick={toggleDivisionModal}>Divide</button>
-            </div>
+                <button className='save-btn' disabled={divisionCount < 2?true:false} onClick={toggleDivisionModal}>Divide</button>
+                </div>
             :null}
              </div>
+             {divisionCount > 1 ? 
                 <Modal  
-                showModal = {showDivisionModal} 
-                toggleModal={toggleDivisionModal} 
-                allMeters={meters}
-                divisionCount = {divisionCount} />
+                    showModal = {showDivisionModal} 
+                    toggleModal={toggleDivisionModal} 
+                    allMeters={meters}
+                    divisionCount = {divisionCount} 
+                    collection= {meterCollectionName} 
+                    totals={{...total}}
+                />
+             :null}
+               
 
         </div>
     );

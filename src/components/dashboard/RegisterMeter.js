@@ -101,7 +101,7 @@ const RegisterMeter = () => {
                        <button className=' save-btn' onClick={handleSave}>Submit</button>
                     </div>
                 </div>
-                <MeterReadingsAndCalculation meters={meter} updatedMeter={setMeter}/>
+                <MeterReadingsAndCalculation meterCollectionName={meterCollectionName} meters={meter} updatedMeter={setMeter}/>
             </div>
         </div>
     );
