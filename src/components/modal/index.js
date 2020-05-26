@@ -160,6 +160,9 @@ const Modal = ({showModal,toggleModal,allMeters,divisionCount,collection,totals}
                             <span className='total-costs'>
                                 Total Costs : Rs.{totals.totalCost}
                             </span>
+                            <span className='total-costs'>
+                                Unit Price : Rs.{totals.totalCost/totals.totalUnits}
+                            </span>
 
                         </div>
                         <div className='results-wrapper'>
