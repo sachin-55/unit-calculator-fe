@@ -9,13 +9,15 @@ const CopyPlugin =require("copy-webpack-plugin");
 
 
 module.exports=(env)=>{
-// // reduce it to a nice object, the same as before
-console.log(`====-------------===ENV====------`,env);
-const envKeys = Object.keys(env).reduce((prev, next) => {
-    prev[`${next}`] = JSON.stringify(env[next]);
-    return prev;
+//     console.log(env);
+    
+// // // reduce it to a nice object, the same as before
+// console.log(`====-------------===ENV====------`,env);
+// const envKeys = Object.keys(env).reduce((prev, next) => {
+//     prev[`${next}`] = JSON.stringify(env[next]);
+//     return prev;
 
-  }, {});
+//   }, {});
   
     return({
             entry: [
@@ -87,7 +89,7 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
                 new CopyPlugin([
                     { from: '_redirects' }
                 ]),
-                new webpack.DefinePlugin(envKeys)
+                // new webpack.DefinePlugin(envKeys)
 
             ],
             devServer:{

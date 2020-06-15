@@ -11,7 +11,7 @@ const login=(email,password)=>async (dispatch)=>{
             }
         })
 
-    const {data} = await Axios.post(`${HOST_API_URL}/api/v1/users/login`,{email,password});
+    const {data} = await Axios.post(`${process.env.HOST_API_URL}/api/v1/users/login`,{email,password});
     dispatch({
         type:USER_LOGIN_SUCCESS,
         payload:data,
