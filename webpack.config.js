@@ -26,7 +26,7 @@ module.exports=()=>{
 //     prev[`process.env.${next}`] = JSON.stringify(env[next]);
 //     return prev;
 
-  }, {});
+//   }, {});
   
     return({
             entry: [
