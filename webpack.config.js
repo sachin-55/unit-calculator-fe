@@ -9,23 +9,23 @@ const CopyPlugin =require("copy-webpack-plugin");
 const env = dotenv.config({ path: `${__dirname}/config.env` }).parsed;
 
     
-// reduce it to a nice object, the same as before
+// // reduce it to a nice object, the same as before
+// console.log(`====-------------===ENV====------`,env);
+// const envKeys = Object.keys(env).reduce((prev, next) => {
+//     prev[`process.env.${next}`] = JSON.stringify(env[next]);
+//     return prev;
+
+//   }, {});
+module.exports=()=>{
+    console.log(env);
+    
+// // reduce it to a nice object, the same as before
 console.log(`====-------------===ENV====------`,env);
 const envKeys = Object.keys(env).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(env[next]);
     return prev;
 
   }, {});
-module.exports=(env)=>{
-//     console.log(env);
-    
-// // // reduce it to a nice object, the same as before
-// console.log(`====-------------===ENV====------`,env);
-// const envKeys = Object.keys(env).reduce((prev, next) => {
-//     prev[`${next}`] = JSON.stringify(env[next]);
-//     return prev;
-
-//   }, {});
   
     return({
             entry: [
