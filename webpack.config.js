@@ -98,7 +98,7 @@ module.exports=()=>{
                 new CopyPlugin([
                     { from: '_redirects' }
                 ]),
-                new webpack.DefinePlugin(envKeys)
+                // new webpack.DefinePlugin(envKeys)
 
             ],
             devServer:{
