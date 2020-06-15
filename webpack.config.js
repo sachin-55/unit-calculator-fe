@@ -5,13 +5,14 @@ const webpack = require("webpack");
 const dotenv = require("dotenv");
 const CopyPlugin =require("copy-webpack-plugin");
 
-// const env = dotenv.config({ path: `${__dirname}/config.env` }).parsed;
 
 
 
 module.exports=()=>{
 // // reduce it to a nice object, the same as before
-const env = dotenv.config().parsed;
+const env = dotenv.config({ path: `${__dirname}/config.env` }).parsed;
+
+// const env = dotenv.config().parsed;
 const envKeys = Object.keys(env).reduce((prev, next) => {
     prev[`${next}`] = JSON.stringify(env[next]);
     return prev;
