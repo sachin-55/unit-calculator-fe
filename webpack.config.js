@@ -18,13 +18,7 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
   }, {});
 module.exports=()=>{
     console.log(env);
-    
-// // // reduce it to a nice object, the same as before
-// console.log(`====-------------===ENV====------`,env);
-// const envKeys = Object.keys(env).reduce((prev, next) => {
-//     prev[`process.env.${next}`] = JSON.stringify(env[next]);
-//     return prev;
-//   }, {});
+
   
     return({
             entry: [
