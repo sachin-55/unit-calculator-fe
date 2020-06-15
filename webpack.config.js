@@ -10,13 +10,12 @@ const CopyPlugin =require("copy-webpack-plugin");
 const env = dotenv.config().parsed;
 
     
-// // reduce it to a nice object, the same as before
-// console.log(`====-------------===ENV====------`,env);
-// const envKeys = Object.keys(env).reduce((prev, next) => {
-//     prev[`process.env.${next}`] = JSON.stringify(env[next]);
-//     return prev;
-
-//   }, {});
+// reduce it to a nice object, the same as before
+console.log(`====-------------===ENV====------`,env);
+const envKeys = Object.keys(env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+  }, {});
 module.exports=()=>{
     console.log(env);
     
@@ -25,7 +24,6 @@ module.exports=()=>{
 // const envKeys = Object.keys(env).reduce((prev, next) => {
 //     prev[`process.env.${next}`] = JSON.stringify(env[next]);
 //     return prev;
-
 //   }, {});
   
     return({
@@ -98,7 +96,7 @@ module.exports=()=>{
                 new CopyPlugin([
                     { from: '_redirects' }
                 ]),
-                // new webpack.DefinePlugin(envKeys)
+                new webpack.DefinePlugin(envKeys)
 
             ],
             devServer:{
