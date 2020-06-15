@@ -6,7 +6,8 @@ const dotenv = require("dotenv");
 const CopyPlugin =require("copy-webpack-plugin");
 
 
-const env = dotenv.config({ path: `${__dirname}/config.env` }).parsed;
+// const env = dotenv.config({ path: `${__dirname}/config.env` }).parsed;
+const env = dotenv.config().parsed;
 
     
 // // reduce it to a nice object, the same as before
