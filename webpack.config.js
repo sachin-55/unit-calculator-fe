@@ -2,18 +2,15 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path')
 const Fiber = require('fibers');
 const webpack = require("webpack");
-const dotenv = require("dotenv");
+const env = require("dotenv").config();
 const CopyPlugin =require("copy-webpack-plugin");
 
 
 
 
-module.exports=()=>{
+module.exports=(env)=>{
 // // reduce it to a nice object, the same as before
-const env = dotenv.config({ path: `${__dirname}/config.env` }).parsed;
 console.log(`====-------------===ENV====------`,env);
-
-// const env = dotenv.config().parsed;
 const envKeys = Object.keys(env).reduce((prev, next) => {
     prev[`${next}`] = JSON.stringify(env[next]);
     return prev;
