@@ -30,7 +30,7 @@ const loadCollectionList = () => async (dispatch, getState) => {
     } = getState();
 
     const { data } = await Axios.get(
-      `${HOST_API_URL}/api/v1/collections?user=${userInfo.user._id}`,
+      `${process.env.HOST_API_URL}/api/v1/collections?user=${userInfo.user._id}`,
     );
 
     dispatch({
@@ -61,7 +61,7 @@ const saveCollection = (collectionName) => async (dispatch, getState) => {
             'Authorization':`Bearer ${userInfo.token}`
         }
     }
-    const {data} =await Axios.post(`${HOST_API_URL}/api/v1/collections`,body,config)
+    const {data} =await Axios.post(`${process.env.HOST_API_URL}/api/v1/collections`,body,config)
 
     dispatch({
       type: COLLECTION_SAVE_SUCCESS,
@@ -83,7 +83,7 @@ const getCollectionDetails = (collectionId) => async (dispatch, getState) => {
     });
 
     const { data } = await Axios.get(
-      `${HOST_API_URL}/api/v1/collections?_id=${collectionId}`,
+      `${process.env.HOST_API_URL}/api/v1/collections?_id=${collectionId}`,
     );
 
     dispatch({
@@ -107,7 +107,7 @@ const loadSubmeterList = (collectionId) => async (dispatch) => {
     });
 
     const { data } = await Axios.get(
-      `${HOST_API_URL}/api/v1/submeters?collectionId=${collectionId}`,
+      `${process.env.HOST_API_URL}/api/v1/submeters?collectionId=${collectionId}`,
     );
 
     dispatch({
@@ -138,7 +138,7 @@ const saveSubmeter = (collectionId,meters) => async (dispatch, getState) => {
         name:meters[0].meterName,
         collectionId,
     }
-    const {data} =await Axios.post(`${HOST_API_URL}/api/v1/submeters`,body,config);
+    const {data} =await Axios.post(`${process.env.HOST_API_URL}/api/v1/submeters`,body,config);
 
   // });
    
