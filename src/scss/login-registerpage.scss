@@ -1,9 +1,11 @@
 @import './all.scss';
 
 .background-wrapper{
+    position: relative;
     background: linear-gradient(to right,rgba(7, 53, 7, 0.5),rgba(7, 53, 7, 0.5)),url('https://setopati.net/wp-content/uploads/2018/12/electricity.jpg') center no-repeat;
     height: 100vh;
     background-size: cover;
+
 }
 
 
@@ -19,7 +21,7 @@
     perspective: 400000px;
     // animation: rotateLeft 2s 5s ease forwards,rotateBackFromLeft 2s 7s ease forwards,
     //             rotateRight 2s 9s ease forwards,rotateBackFromRight 2s 11s ease forwards;
-               
+
 }
 .animateLeft{
     animation: rotateLeft 2s 0.3s ease forwards;
@@ -44,7 +46,7 @@
     text-align: center;
     color: aquamarine;
     font-size: 5em;
-   border:1px solid rgba(63, 63, 63, 0.748)
+   border:1px solid rgba(63, 63, 63, 0.748);
    
 }
 .login-register{
@@ -79,22 +81,22 @@
         transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);   
     }
     20%{
-        transform:perspective(1000px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);   
+        transform:perspective(3000px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);   
     }
     45%{
-        transform: perspective(1000px) rotateX(90deg) rotateY(-90deg) rotateZ(0deg) ;   
+        transform: perspective(3000px) rotateX(90deg) rotateY(-90deg) rotateZ(0deg) ;   
     }
     100%{
-        transform:perspective(1000px) rotateX(90deg) rotateY(-90deg) rotateZ(-90deg);   
+        transform:perspective(3000px) rotateX(90deg) rotateY(-90deg) rotateZ(-90deg);   
     }
    
 }
 @keyframes rotateBackFromLeft{
     0%{
-        transform:perspective(1000px) rotateX(90deg) rotateY(-90deg) rotateZ(-90deg);   
+        transform:perspective(3000px) rotateX(90deg) rotateY(-90deg) rotateZ(-90deg);   
     }
     50%{
-        transform:perspective(1000px) rotateX(90deg) rotateY(-90deg) rotateZ(0deg);   
+        transform:perspective(3000px) rotateX(90deg) rotateY(-90deg) rotateZ(0deg);   
     }
     80%{
         transform: rotateX(90deg) rotateY(-0deg) rotateZ(0deg);   
@@ -111,19 +113,19 @@
         transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg);   
     }
     45%{
-        transform:perspective(1000px) rotateX(90deg) rotateY(90deg) rotateZ(0deg);   
+        transform:perspective(3000px) rotateX(90deg) rotateY(90deg) rotateZ(0deg);   
     }
     100%{
-        transform:perspective(1000px) rotateX(90deg) rotateY(90deg) rotateZ(90deg);  
+        transform:perspective(3000px) rotateX(90deg) rotateY(90deg) rotateZ(90deg);  
     }
 
 }
 @keyframes rotateBackFromRight{
     0%{
-        transform:perspective(1000px) rotateX(90deg) rotateY(90deg) rotateZ(90deg);   
+        transform:perspective(3000px) rotateX(90deg) rotateY(90deg) rotateZ(90deg);   
     }
     50%{
-        transform:perspective(1000px) rotateX(90deg) rotateY(90deg) rotateZ(0deg);   
+        transform:perspective(3000px) rotateX(90deg) rotateY(90deg) rotateZ(0deg);   
     }
     80%{
         transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg);   

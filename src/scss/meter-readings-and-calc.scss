@@ -4,7 +4,7 @@
 .meter-readings-and-calculation{
     color: #fff;
     position: relative;
-}
+} 
 // Meter readings and table------------------------------
 .meter-readings{
     background-color: rgba(82, 82, 88, 0.544);
@@ -291,7 +291,34 @@
     transition: opacity 0.5s;
 }
 
-.save-btn:disabled{
+.save-btn:disabled,
+.save-btn:disabled:hover{
     background-color: rgb(143, 124, 124);
     color: rgb(66, 58, 59);
+    cursor: crosshair;
+}
+.db-btn{
+    position: relative;
+    margin: 10rem 0 ;
+}
+
+.saveToDB{
+    background: none;
+    color: #fff;
+    position: absolute;
+    top: -5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 5rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    border: 1px solid #8f7d7d;
+    color: rgb(134, 140, 177);
+    cursor: pointer;
+    transition: 0.5s;
+    font-weight: 700;
+}
+.saveToDB:hover{
+    background-color: #7d808f;
+    color: #2e2b3b;
 }

@@ -4,6 +4,8 @@ import Login from "../components/Login";
 import Register from '../components/Register';
 import { Button } from 'theme-ui';
 import Navbar from '../components/dashboard/Navbar';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const LoginRegisterPage = () => {
     const [animateLogin,setAnimateLogin]=React.useState('');
@@ -11,6 +13,9 @@ const LoginRegisterPage = () => {
     const [animateBackFromLogin,setAnimateBackFromLogin]=React.useState('');
     const [animateBackFromRegister,setAnimateBackFromRegister]=React.useState('');
     const animationForBox = `${animateLogin} ${animateRegister} ${animateBackFromLogin} ${animateBackFromRegister} `
+   
+    const {loginStatus} = useSelector(state=>state.userLogin)
+   
     const handleLoginClick=()=>{
         setAnimateLogin('animateLeft')
         setAnimateRegister('')
@@ -43,15 +48,17 @@ const LoginRegisterPage = () => {
 
     return (
         <div className='background-wrapper'>
-                <Navbar toggle='false'/>
+            {loginStatus ? <Redirect to="/home" />:
+            <>
+                <Navbar />
             <div className='container'>
                 <div className={`box ${animationForBox}`}>
                     <div className='login-register plane'>
                             <h1>Hi There!!!</h1>
                             <p>
-                                Let's start to calculate
+                                Proceed to <br/>Login
                             </p>
-                            <p className='newUser'>If you are new User, <span onClick={handleRegisterClick}>click here</span></p>
+                            <p className='newUser'>If you are new User, <span onClick={handleRegisterClick}>click here</span><br/> To Register</p>
                             <Button className="btn login-btn" onClick={handleLoginClick}>Login</Button>
                     </div>
                     <div className='login plane'>
@@ -67,6 +74,7 @@ const LoginRegisterPage = () => {
                     </div>
                 </div>
             </div>
+            </>}
         </div>
     );
 }

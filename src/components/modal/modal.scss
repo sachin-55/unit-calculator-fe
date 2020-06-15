@@ -147,7 +147,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgb(13, 65, 80);
+    background: #0005;
     padding: 2rem 0.5rem 0;
     margin: 1rem 0;
 
@@ -318,3 +318,29 @@ span.username{
     flex: 1 10rem;
 }
 
+////////////////////////////////////////
+.db-btn-modal{
+    position: relative;
+    margin: 10rem 0 0;
+}
+
+.saveToDB-modal{
+    background: none;
+    color: #fff;
+    position: absolute;
+    top: -5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 5rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    border: 1px solid #8f7d7d;
+    color: rgb(134, 140, 177);
+    cursor: pointer;
+    transition: 0.5s;
+    font-weight: 700;
+}
+.saveToDB-modal:hover{
+    background-color: #7d808f;
+    color: #2e2b3b;
+}

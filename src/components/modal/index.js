@@ -161,7 +161,7 @@ const Modal = ({showModal,toggleModal,allMeters,divisionCount,collection,totals}
                                 Total Costs : Rs.{totals.totalCost}
                             </span>
                             <span className='total-costs'>
-                                Unit Price : Rs.{totals.totalCost/totals.totalUnits}
+                                Unit Price : Rs.{totals.totalCost===0?'10': parseFloat(totals.totalCost)/parseFloat(totals.totalUnits)}
                             </span>
 
                         </div>
@@ -204,8 +204,11 @@ const Modal = ({showModal,toggleModal,allMeters,divisionCount,collection,totals}
                         }
                         </div>
                     </div>
+                  
                 </div>
+                
             </div>
+            
         </div>
         <Backdrop visibility={showModal}/>
         </>

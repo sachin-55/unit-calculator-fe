@@ -2,11 +2,18 @@
 
 // Header
 .header{
-    position: relative;
+    position: relative;;
+    left: 0;
+    right: 0;
     height: 100px;
-    background-image: linear-gradient(to bottom,rgba(23, 165, 212, 0.796) 20%,transparent);
-    z-index: 1050;
-  
+    background-image: linear-gradient(rgba(23, 165, 212, 0.9) ,rgba(23, 165, 212, 0.8) );
+    background-image: linear-gradient(to bottom,rgba(23, 165, 212, 0.9) ,rgba(23, 165, 212, 0.9)),url('https://etimg.etb2bimg.com/photo/68902785.cms');
+    background-size: cover;  
+    background-repeat: no-repeat;
+    background-position: center;  
+    background-blend-mode:  difference;
+    z-index: 1;
+    margin-bottom:calc(200vh - 100px);
 }
 
 .logo{
@@ -14,7 +21,6 @@
     margin: 0 auto;
     background-color: red;
     width: 23rem;
-    z-index: 1100;
 }
 .word{
     position: absolute;
@@ -41,22 +47,28 @@
     font-weight: 300;
 }
 
+.bodyWrapper{
+    position: relative;
+    // top:-15vh;
+}
 
 // Hero
 .hero{
-    position: absolute;
-    top: 0;
     background: linear-gradient(to bottom,transparent,rgba(26, 122, 69, 0.796)),url('../images/beach-boat.jpg') center no-repeat;
     background-size: cover;
-    height: 100%;
+    height: 100vh;
     width: 100%;
+    // display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 .headline{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    padding-top: 50vh;
+    padding-top: 40vh;
 }
 .sub-headline{
     font-size: 4rem;
@@ -97,6 +109,10 @@
     text-align: center;
     width: 11rem;
     margin: 0 auto;
+}
+.btn-explore a{
+    color: #fff;
+
 }
 .btn-explore{
     background-color: rgba(60, 143, 60, 0.789);
@@ -157,46 +173,34 @@
     transform: scale(0);
     opacity: 0;
 }
-.animateUp{
-    animation: animateUp 1s forwards;
-    animation-delay: 0.5s;
+
+.loginFromLand{
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: 0.3rem;
+    margin-right: -0.3rem;
+    color: #fff;
 }
-.animateDown{
-    animation: animateDown 2s forwards;
+.loginFromLand a{
+    color: #fff;
+    font-size: 2.5rem;
+    text-decoration: underline;
+    border: 1px solid transparent;
+    padding: 1rem;
+    transition: 0.6s;
+
 }
-.animateReveal{
-    animation: animateReveal 1s forwards;
+.loginFromLand a:hover{
+    color: #fffaaa;
+    border: 1px solid #fffaaa;
+    padding: 1rem;
+    text-decoration: none;
 }
-@keyframes animateUp{
-    0%{
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100%{
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-    
-}
-@keyframes animateDown{
-    0%{
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100%{
-        opacity: 0;
-        transform: translateY(100%) scale(0);
-    }
-    
-}
-@keyframes animateReveal{
-    0%{
-        opacity: 0;
-        transform: scale(0.5);
-    }
-    100%{
-        opacity: 1;
-        transform: scale(1);
-    }
-    
+
+// //////////////////////////////////////////////////
+.simple-calculation{
+    background-color: red;
+    position: absolute;
+    top: 100vh;
+    width: 100%;
 }

@@ -6,10 +6,14 @@ import { jsx } from 'theme-ui';
 import ReactDOM from 'react-dom';
 import Root from './src/Root';
 
+import {Provider} from 'react-redux';
+import store from './src/store';
 
 const Index =hot(() => {
     return (
-        <Root />
+        <Provider store={store}>
+            <Root />
+        </Provider>
     );
 });
 

@@ -1,110 +1,100 @@
-import React from 'react';
-import '../../scss/register-meter.scss';
+import React from "react";
+import "../../scss/register-meter.scss";
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import MeterReadingsAndCalculation from './MeterReadingsAndCalculation';
-
+import {  saveCollection, loadCollectionList } from "../../redux/actions/meterAction";
+import { 
+  openCreateCollection,
+  closeCreateCollection,
+} from "../../redux/actions/UIActions";
 
 
 const RegisterMeter = () => {
-    const [meterNumber,setMeterNumber] = React.useState(1);
-    const [meterCollectionName,setMeterCollectionName] = React.useState('');
+  const [meterCollectionName, setMeterCollectionName] = React.useState('');
 
-    const meterInitial={
-        meterName:`meter-${meterNumber}`,
-       previous:0,
-       current:0,
-       units:0,
-       cost:0
-    }
+  const collectionsList = useSelector(state => state.collectionList);
+  const {collectionList,loading,error}=collectionsList;
+  const collectionSave = useSelector(state => state.collectionSave);
+  const {collection,success,loading:saveLoading,error:saveError}=collectionSave;
+  const { createCollection } = useSelector(state => state.UI);
 
-    const [meter,setMeter] = React.useState([{...meterInitial}]);
+  const dispatch = useDispatch();
 
-    const addFields = ()=>{
-        setMeterNumber((meterNumber)=>meterNumber+1);
-        
-        setMeter([...meter,{ meterName:`meter-${meterNumber+1}`,
-                                previous:0,
-                                current:0,
-                                units:0,
-                                cost:0 }
-                            ]);
-    }
-    const removeField = (e)=>{
-        const updatedMeter = [...meter];
-        updatedMeter.splice(e.target.dataset.id,1);
-        setMeter(updatedMeter);
-    }
-    const handleDynamicChange = (e)=>{
-        const updatedMeter = [...meter];
-        updatedMeter[e.target.dataset.id][e.target.className] = e.target.value;
-        setMeter(updatedMeter);
-    }
 
-    const handleSave=()=>{
-        console.log('save');
-        console.log(meterCollectionName);
-        console.log(meter);
-        
-    }
+  React.useEffect(()=>{
+    dispatch(loadCollectionList());
+  },[success]);
 
-    return (
-        <div className='register-meter-wrapper'>
-            <div className='container'>
-                <div className='register-meter'>
-                    <div className='register-meter__title'>
-                        <h1>Enter number of sub-meters</h1> 
-                    </div>
-                    <div className="register-meter__info">
-                        <p>How many meters are used ?<br/> Register required number of sub-meter and also the percentage shared if specific meter is shared between others members. Also specify meter name for easy identification. </p>
-                        {/* <div className='example'>
-                            <button>For Example</button>
-                            <div className='example-picture'>
+  const handleSaveCollection = async () =>  {
+    dispatch(saveCollection(meterCollectionName));
+    setMeterCollectionName('');
+  };
 
-                            </div>
 
-                        </div> */}
-                    </div>
-                    <div className='register-meter__collection'>
-                        <input type="text" placeholder="Meter Collection Name" onChange={(e)=>{setMeterCollectionName(e.target.value)}} className="meter-collection-name"/>
-                        <div className='register-meter__count'>
-                            <button className='register-meter-btn' onClick={addFields} >Add new Sub-meter</button>
-                        </div>
-                        <div className='register-meter__name-percent'>
-                            {meter.map((val,idx)=>{
-                                const meterId = `meter-${idx}`;
-                                const percentageId = `percentage-${idx}`;
-                                return(
-                                    <div key={idx} className="register-field-row">
-                                        <input 
-                                            type='text' 
-                                            name={meterId} 
-                                            data-id={idx} 
-                                            className='meterName' 
-                                            placeholder="Meter Name"
-                                            value={meter[idx].meterName || ''} 
-                                            onChange={handleDynamicChange}
-                                        /> 
-                                        {/* <input 
-                                            type='number' 
-                                            name={percentageId} 
-                                            data-id={idx} 
-                                            className='percentage' 
-                                            placeholder="Meter %"
-                                            value={meter[idx].percentage || ''}
-                                            onChange={handleDynamicChange}
-                                        /><span>%</span> */}
-                                        <span className='delete-meter' data-id ={idx} onClick={removeField}>X</span>
-                                    </div>
-                                )
-
-                            })}
-                        </div>
-                       <button className=' save-btn' onClick={handleSave}>Submit</button>
-                    </div>
-                </div>
-                <MeterReadingsAndCalculation meterCollectionName={meterCollectionName} meters={meter} updatedMeter={setMeter}/>
+  return (
+      <div className="register-meter-wrapper">
+          <div className="container">
+          <div className="register-meter__title">
+                      <h1>Submeter-Collection </h1>
+                    
             </div>
+         
+        <div className="buttonWrapper">
+                  <button onClick={() => dispatch(openCreateCollection())} className="addNewMeterCollectionBtn">
+                      Add New Meter Collection
+                    </button>
         </div>
-    );
-}
+        <div className="register-meter__title2">
+                      <h3>List of Submeter-Collections </h3>
+            </div>
+            <p className='description'>
+                Every list consist of submeters.
+            </p>
+              {createCollection ?
+                  <div className="register-meter">
+                  <div className="register-meter__title">
+                      <h1>Submeter-Collection name</h1>
+                      {saveLoading && <div>Loading...</div>}
+                        {saveError}
+            </div>
+
+                  <div className="register-meter__collection">
+                      <input type="text" placeholder="Enter Name" value={meterCollectionName} onChange={(e) => { setMeterCollectionName(e.target.value) ;}} className="meter-collection-name" />
+                  <div>
+                     
+                      <button disabled={meterCollectionName === ''?true:false} onClick={handleSaveCollection} className="save-btn">
+                          Save
+                        </button>
+                      <button onClick={() => dispatch(closeCreateCollection())} className="save-btn">
+                          Cancel
+                        </button>
+            </div>
+          </div>
+          </div>
+                  :null}
+
+        <div className="meterCollectionList">
+                  <ul>
+            <li>Submeter Collection lists</li>
+                      {collectionList && collectionList.map(collection => (
+                            <li key={collection._id} className='collectionItem'>
+                                <Link to={{
+                                  pathname:`/collection/${collection._id}`,
+                                  state:{collection}
+                                  }}> 
+                                    <div>{collection.name}</div>
+                                  </Link>
+                                <span>X</span>
+                            </li>
+                          ))}
+          </ul>
+        </div>
+
+        {/* <MeterReadingsAndCalculation meterCollectionName={meterCollectionName} meters={meter} updatedMeter={setMeter}/> */}
+      </div>
+    </div>
+  );
+};
 
 export default RegisterMeter;
