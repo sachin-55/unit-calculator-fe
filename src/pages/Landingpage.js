@@ -22,6 +22,8 @@ const Landingpage = () => {
                                 <div className='logo'>
                                     <span className="word first-word">Unit</span>
                                     <span className="word second-word">Calculator</span>
+          {process.env.HOST_API_URL}
+
                                 </div>
                                 </Link>
                      
