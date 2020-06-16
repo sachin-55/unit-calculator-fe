@@ -32,8 +32,7 @@ const Collection = () => {
     const {collectionId} = useParams();
 
 React.useEffect(()=>{
-    
-    dispatch(loadSubmeterList(collectionId));
+  
     
 },[success]);
 

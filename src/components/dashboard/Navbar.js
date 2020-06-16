@@ -11,6 +11,8 @@ const Navbar= (props) => {
     const [menuOpen,setMenuOpen] = React.useState('');
 
     const {loginStatus:login} = useSelector(state=>state.userLogin);
+    const {loginStatus:registered} = useSelector(state=>state.userRegister);
+
 
     const dispatch = useDispatch();
 
@@ -36,7 +38,7 @@ const Navbar= (props) => {
                             </div>
                                 
                             <div className='nav-list'>
-                                {login === true?
+                                {login === true || registered === true?
                                 <>
                                 <Link to='/home' className='link-items'>
                                     <div className='nav-items'>Home</div>

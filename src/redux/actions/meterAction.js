@@ -109,6 +109,7 @@ const loadSubmeterList = (collectionId) => async (dispatch) => {
     const { data } = await Axios.get(
       `${process.env.HOST_API_URL}/api/v1/submeters?collectionId=${collectionId}`,
     );
+    // console.log(JSON.stringify(data.submeters));
 
     dispatch({
       type: SUBMETER_LIST_SUCCESS,

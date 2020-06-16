@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import Cookie from "js-cookie";
-import { userLoginReducer } from "./redux/reducers/userReducers";
+import { userLoginReducer, userRegisterReducer } from "./redux/reducers/userReducers";
 import {
   submeterSaveReducer,
   collectionSaveReducer,
@@ -15,11 +15,13 @@ const userInfo = Cookie.getJSON("userInfo") || null;
 const collectionList = [];
 const initialState = {
   userLogin: { ...userInfo },
+  userRegister:{ userInfo:null },
   UI: { createCollection: false },
 };
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
   submeterSave: submeterSaveReducer,
   submetersList:submeterListReducer,
   collectionSave: collectionSaveReducer,
