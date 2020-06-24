@@ -41,7 +41,7 @@ const Landingpage = () => {
                             <div className="main-headline">Easy way to divide your home sub- meter units</div>
                         </div>
                         <div className="btn btn-explore" >
-                            <Link to='/register' className="link-items">
+                            <Link to='/home' className="link-items">
                                 Enter
                             </Link>
                         </div>

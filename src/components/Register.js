@@ -17,15 +17,18 @@ const Register = ({backClick}) => {
     const {loading,userInfo,error} = user;
     const dispatch = useDispatch();
 
-    const history=useHistory()
+    const history=useHistory();
+
+    React.useEffect(()=>{
+        if(userInfo){
+            history.push('/home');
+        }
+    },[userInfo]);
     const handleRegister=(e)=>{
 
         e.preventDefault();
             dispatch(register(name,email,password,passwordConfirm));
 
-           if(userInfo){
-               history.push('/home')
-           }
     }
 
     return (
