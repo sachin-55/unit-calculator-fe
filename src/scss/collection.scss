@@ -106,9 +106,15 @@
 .submeterListContainer {
     margin-top: 3rem;
 }
+.submeterListTitle{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .submeterListContainer ul{
     background-color: rgba(30, 29, 39, 0.5);
-    width: 75%;
+    width: 30%;
+    min-width: 25rem;
     margin: 0 auto;
     padding: 1rem;
 }
@@ -137,12 +143,9 @@
     justify-content: space-between;
     align-items: center;
 }
-.submeterItem a{
-    width: 100%;
-    
-}
-.submeterItem a:hover{
-    width: 100%;
+.submeterItem > div{
+  width: 100%;
+  cursor: pointer;
 }
 .submeterItem span{
     position: absolute;
@@ -156,7 +159,108 @@
     color: red;
 }
 
+////////////////////////////////////////////
+.viewReadings{
+    width: 100%;
+    margin: 3rem 0;
+    overflow: hidden;
+}
+.click-here{
+position: relative;
+width: 80%;
+margin: 0 auto;
+text-align: center;
+border: 1px solid #000;
+font-size: 1.6rem;
+cursor: pointer;
+transition: 0.5s;
+padding: 0.5rem 0;
+border-radius: 0.5rem;
+z-index: 2;
+}
+.click-here:hover{
+    background-color: rgb(31, 35, 36);
+    color: #fff;
+}
+.submeterListView{
+    border: 1px solid #000;
+    width: 80%;
+    margin: 1rem auto;
+    transform: translateY(-174%) scale(0);
+    transition: transform 0.5s ease-out;
+    border-radius: 0.5rem;
+    color: black;
+    height: 0rem;
+    padding: 1rem;
+
+}
+.submeterListView.roll{
+    transform: translateY(0%);
+    height: 100%;
+}
+.filterReadings{
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+.filterReadings input , .filterReadings select{
+    padding: 0.5rem 1rem;
+    width: 18%;
+}
+.filterReadings select{
+    padding: 0.5rem;
+}
+
+.filterReadings span{
+    font-size: 1.3rem;
+    align-self: center;
+}
+.submeter-readings{
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem 0;
+}
+.submeterNames{
+    flex-basis: 15rem;
+    overflow: hidden;
+    background-color: #fcfcfc;
+    padding: 0.5rem ;
+}
+.submeterNames > div{
+    font-size: 1.3rem;
+    line-height: 3rem;
+    cursor: pointer;
+}
+.submeterNames > div:hover{
+    text-decoration: underline;
+    background-color: #e6e3e3;
+}
+
+.submeterReadings{
+    background-color: #f0f0f0;
+    border-left: 1px solid rgb(71, 64, 64);
+    padding: 0.5rem ;
+    flex: 1;
+}
+.submeterNameTitle{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
 
 
-
-
+}
+.yearMonthWrapper{
+    margin: 0.5rem 0;
+    width: 100%;
+}
+.yearMonthWrapper > div{
+    font-size: 1.3rem;
+    font-weight: 100;
+}
+.date, .readings{
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: inline-block;
+    width: 6rem;
+    margin-right: 0.5rem;
+}

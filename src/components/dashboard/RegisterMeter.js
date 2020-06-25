@@ -29,6 +29,7 @@ const RegisterMeter = () => {
   const handleSaveCollection = async () =>  {
     dispatch(saveCollection(meterCollectionName));
     setMeterCollectionName('');
+    dispatch(closeCreateCollection());
   };
 
 
@@ -77,7 +78,7 @@ const RegisterMeter = () => {
         <div className="meterCollectionList">
                   <ul>
             <li>Submeter Collection lists</li>
-                      {collectionList && collectionList.map(collection => (
+                      {(collectionList && collectionList.map(collection => (
                             <li key={collection._id} className='collectionItem'>
                                 <Link to={{
                                   pathname:`/collection/${collection._id}`,
@@ -87,7 +88,7 @@ const RegisterMeter = () => {
                                   </Link>
                                 <span>X</span>
                             </li>
-                          ))}
+                          ))) || <li className='loading'>Loading... Please wait !!!</li>}
           </ul>
         </div>
 

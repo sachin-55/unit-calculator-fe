@@ -8,6 +8,8 @@ import {
   collectionListReducer,
   collectionDetailsReducer,
   submeterListReducer,
+  readingsSaveReducer,
+  readingsLoadReducer
 } from "./redux/reducers/meterReducers";
 import { UIReducers } from "./redux/reducers/UIreducers";
 
@@ -28,6 +30,8 @@ const reducer = combineReducers({
   collectionList:collectionListReducer,
   collectionDetails:collectionDetailsReducer,
   UI: UIReducers,
+  readingsSave:readingsSaveReducer,
+  readingsList:readingsLoadReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

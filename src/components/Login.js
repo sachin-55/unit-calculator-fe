@@ -15,12 +15,13 @@ const Login = ({backClick}) => {
     const {loading,userInfo,error} = user;
     const dispatch = useDispatch();
 
-    const history=useHistory()
+    const history=useHistory();
+
+
     const handleLogin=(e)=>{
 
         e.preventDefault();
-            dispatch(login(email,password));
-
+        dispatch(login(email,password));
            if(userInfo){
                history.push('/home')
            }

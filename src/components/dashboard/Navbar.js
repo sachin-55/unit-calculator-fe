@@ -15,7 +15,6 @@ const Navbar= (props) => {
 
 
     const dispatch = useDispatch();
-
     const toggleMenu=()=>{
         menuOpen===""?setMenuOpen('open'): setMenuOpen("");
     } 

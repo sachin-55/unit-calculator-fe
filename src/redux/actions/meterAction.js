@@ -16,6 +16,12 @@ import {
   COLLECTION_DETAIL_REQUEST,
   COLLECTION_DETAIL_SUCCESS,
   COLLECTION_DETAIL_FAIL,
+  READINGS_SAVE_FAIL,
+  READINGS_SAVE_REQUEST,
+  READINGS_SAVE_SUCCESS,
+  READINGSLIST_LOAD_REQUEST,
+  READINGSLIST_LOAD_SUCCESS,
+  READINGSLIST_LOAD_FAIL
 } from '../constants/meterConstants';
 import { CLOSE_CREATE_COLLECTION } from '../constants/UIConstants';
 
@@ -107,8 +113,7 @@ const loadSubmeterList = (collectionId) => async (dispatch) => {
     });
 
     const { data } = await Axios.get(
-      `${process.env.HOST_API_URL}/api/v1/submeters?collectionId=${collectionId}`,
-    );
+      `${process.env.HOST_API_URL}/api/v1/submeters?collectionId=${collectionId}`);
     // console.log(JSON.stringify(data.submeters));
 
     dispatch({
@@ -145,6 +150,7 @@ const saveSubmeter = (collectionId,meters) => async (dispatch, getState) => {
    
   dispatch({
     type: SUBMETER_SAVE_SUCCESS,
+    payload:data
   });
    
 
@@ -157,4 +163,78 @@ const saveSubmeter = (collectionId,meters) => async (dispatch, getState) => {
 };
 
 
-export { saveCollection, loadCollectionList,getCollectionDetails,saveSubmeter,loadSubmeterList };
+
+const saveReadings = (submeterId,year,month,reading,unitPrice) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: READINGS_SAVE_REQUEST,
+    });
+    const {userLogin:{userInfo}}= getState();
+    const config = {
+      headers:{
+          'Authorization':`Bearer ${userInfo.token}`
+      }
+  }
+      const body={
+        submeter:submeterId,
+        readingsYear:year,
+        readingsMonth:month,
+        readings:reading,
+        unitPrice,
+    }
+    const {data} =await Axios.post(`${process.env.HOST_API_URL}/api/v1/readings`,body,config);
+
+  dispatch({
+    type: READINGS_SAVE_SUCCESS,
+    payload:data
+  });
+   
+
+  } catch (error) {
+    
+    dispatch({
+      type: READINGS_SAVE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
+const loadReadings = ()=>async (dispatch,getState)=>{
+  try {
+    dispatch({
+      type: READINGSLIST_LOAD_REQUEST,
+    });
+    const {userLogin:{userInfo}}= getState();
+    const {submetersList:{submeterList}} = getState();
+
+    let promises = [];
+    submeterList.forEach(submeter => {
+       promises.push(Axios.get(`${process.env.HOST_API_URL}/api/v1/readings?submeter=${submeter._id}`));
+    });
+
+    const res = await Promise.all(promises);
+
+    let data = [];
+    res.forEach((item)=>{
+      data.push(item.data.readings)
+    });
+
+  dispatch({
+    type: READINGSLIST_LOAD_SUCCESS,
+    payload:data
+  });
+   
+
+  } catch (error) {
+    
+    dispatch({
+      type: READINGSLIST_LOAD_FAIL,
+      payload: error.message,
+    });
+  }
+}
+
+
+
+export { saveCollection, loadCollectionList,getCollectionDetails,saveSubmeter,loadSubmeterList,saveReadings,loadReadings };
