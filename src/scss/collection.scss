@@ -229,13 +229,17 @@ z-index: 2;
 .submeterNames > div{
     font-size: 1.3rem;
     line-height: 3rem;
-    cursor: pointer;
 }
 .submeterNames > div:hover{
-    text-decoration: underline;
     background-color: #e6e3e3;
-}
+}   
 
+.submeterNames .text{
+    cursor: pointer;
+}
+.submeterNames .text:hover{
+    text-decoration: underline;
+}
 .submeterReadings{
     background-color: #f0f0f0;
     border-left: 1px solid rgb(71, 64, 64);
@@ -252,15 +256,117 @@ z-index: 2;
 .yearMonthWrapper{
     margin: 0.5rem 0;
     width: 100%;
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+
 }
 .yearMonthWrapper > div{
     font-size: 1.3rem;
     font-weight: 100;
 }
-.date, .readings{
-    font-size: 1.2rem;
-    font-weight: 500;
-    display: inline-block;
-    width: 6rem;
-    margin-right: 0.5rem;
+
+.date.title, .readings.title{
+
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+////////////////////////////////////////////
+.calculationOfCostAndUnits{
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid lightblue;
+    margin: 5rem 0;
+}
+.calculationOfCostAndUnits h1{
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 0.5rem solid rgb(8, 27, 53); 
+}
+
+.calculationTable{
+    width: 95%;
+    margin: 0 auto;
+    padding: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid gray;
+
+}
+.from-to{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 3;
+    flex-wrap: wrap;
+    margin: 0 3rem;
+    padding: 0.5rem;
+}
+.from-to >div:nth-child(2){
+    font-size: 1.5rem;
+}
+.calculationTable .submeterName{
+    justify-self: flex-start;
+    flex: 1;
+    background-color: lightgrey;
+    border: 1px solid gray;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+}
+.calculationTable .submeterFrom select,
+.calculationTable .submeterTo select{
+    width: 13rem;
+    padding: 0.5rem 1rem;
+
+}
+.btn-wrapper{
+    display: flex;
+    justify-content: center;
+}
+.unit-wrapper{
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 2rem 0 0 0;
+}
+.unit-wrapper input{
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    padding: 0 3rem;
+    width: 9rem;
+}
+////////////////////////////////
+.result{
+
+}
+.rowWrapper{
+    display: flex;
+    justify-content: space-between;
+    color: rgb(43, 37, 37);
+    font-size: 1.3rem;
+}
+.rowWrapper:first-child{
+    background-color: gray;
+    color: #fff;
+
+}
+.rowWrapper:last-child{
+    background-color:gray;
+    color: #fff;
+    font-weight: 700;
+}
+.rowWrapper > div{
+    flex-basis: 7rem;
+    padding: 0.5rem;
+
+}
+.rowWrapper > div:nth-child(1){
+    flex-basis: 12rem;
 }

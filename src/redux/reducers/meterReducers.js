@@ -146,7 +146,7 @@ const collectionListReducer = (state = {collectionList:[]}, action) => {
 const readingsSaveReducer = (state = {readings:[]}, action) => {
   switch (action.type) {
     case READINGS_SAVE_REQUEST:
-      return { loading: true };
+      return { loading: true,success:false };
     case READINGS_SAVE_SUCCESS:
       return {
         loading: false,

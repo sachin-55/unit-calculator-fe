@@ -17,7 +17,7 @@ React.useEffect(()=>{
 	setYear('');
 	setReading('');
 	setMonth('January');
-},[success])
+},[success]);
 
 	const dispatch = useDispatch();
 

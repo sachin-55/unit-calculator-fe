@@ -214,11 +214,22 @@ const loadReadings = ()=>async (dispatch,getState)=>{
     });
 
     const res = await Promise.all(promises);
-
+    
+    // console.log({res});
+    
     let data = [];
-    res.forEach((item)=>{
-      data.push(item.data.readings)
-    });
+      res.forEach((item)=>{
+        if(item.data.results !== 0){
+          // console.log('From if',item.data.readings);
+
+          data.push(item.data.readings)
+        }else{
+          // console.log('From else',item.data.readings);
+          data.push([])
+        }
+      });
+  //  console.log({data});
+   
 
   dispatch({
     type: READINGSLIST_LOAD_SUCCESS,

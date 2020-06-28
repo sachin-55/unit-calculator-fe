@@ -6,6 +6,9 @@ import { useParams, useLocation, Link } from 'react-router-dom';
 import { loadSubmeterList, saveSubmeter, loadReadings} from '../../redux/actions/meterAction';
 import {openCreateSubmeter, closeCreateSubmeter} from '../../redux/actions/UIActions';
 
+
+
+
 import ReadingsModal  from '../submeterReadingsModal/ReadingsModal';
 const Collection = () => {
     const [meterNumber,setMeterNumber] = React.useState(1);
@@ -20,7 +23,11 @@ const Collection = () => {
     const [enableReadingsModal,setEnableReadingsModal] = React.useState(false);
     const [submeterForReadings,setSubmeterForReadings] = React.useState({});
     const [arrangeReadings,setArrangeReadings] = React.useState({});
-
+    const [filteredReadings,setFilteredReadings] = React.useState();
+    const [selectedTitle,setSelectedTitle] = React.useState();
+    const [calculationData,setCalculationData]=React.useState([]);
+    const [unitPrice,setUnitPrice] = React.useState(10);
+    const [enableCalculation,setEnableCalculation]=React.useState(false);
     const {state} = useLocation();
     const collection = state.collection;
     const [toggleView,setToggleView] = React.useState(false);
@@ -34,6 +41,8 @@ const Collection = () => {
 
     const readingsList = useSelector(state=>state.readingsList);
     const {readingList,loading:readingLoading,error:readingError,success:readingSuccess} = readingsList;
+    
+    const {success:successReadingSave} = useSelector(state=>state.readingsSave)
      
 
     const dispatch = useDispatch();
@@ -41,11 +50,14 @@ const Collection = () => {
 
     React.useEffect(()=>{
         dispatch(loadSubmeterList(collectionId));
+        // location.reload();
     },[success]);
+
 
     React.useEffect(()=>{
         dispatch(loadReadings());
-    },[loadSuccess]);
+        // setEnableCalculation(true);
+    },[loadSuccess,successReadingSave]);
 
     React.useEffect(()=>{
     if(submeterList && readingList){
@@ -53,17 +65,58 @@ const Collection = () => {
 
         let normalizedList={};
 
+        filterReadings(submeterId[0]);
         
+        let tempData = [];
+        submeterList.forEach(element => {
+            tempData.push({
+                id:element._id,
+                name:element.name,
+                previous: 0,
+                current: 0,
+                units:0,
+                cost:0
+            });
+        });
+        setCalculationData(tempData);
     }
-    
+    setEnableCalculation(true);
     },[readingSuccess]);
+
+
+    const filterSubmeterName = (id)=>{
+        return submeterList.filter(m=>m._id === id)[0].name;
+}
+
+    const filterReadings= (submeterId)=>{
+        if(readingList.length > 0 && submeterList.length > 0){
+        const data = readingList.filter(reading=>{
+                if (reading.length !== 0) {
+                    
+            if(reading[0].submeter._id === submeterId)
+            {return true;} 
+        }
+
+            return false
+            });
+
+
+
+        const title= filterSubmeterName(submeterId);
+        console.log(title);
+        
+        setSelectedTitle(title);
+        setFilteredReadings(data[0]);
+        }
+    }
+
 
     const addFields = ()=>{
         setMeterNumber((meterNumber)=>meterNumber+1);
         
         setMeter([...meter,{ meterName:`meter-${meterNumber+1}`,
-                                previous:0,
-                                current:0,
+                                previous:'',
+                                current:'',
                                 units:0,
                                 cost:0 }
                             ]);
@@ -81,6 +134,7 @@ const Collection = () => {
 
     
     const handleSaveCollection=()=>{
+
         const dubs = submeterList.find(i=>i.name === meter[0].meterName)
         if(dubs){
             alert(`${meter[0].meterName} name already exists` );
@@ -88,6 +142,7 @@ const Collection = () => {
         }
         dispatch(saveSubmeter(collectionId,meter));
                 setMeter([{...meterInitial}]);
+                // setEnableCalculation(false);
        }
     
     const submeterReadingsHandler=(id,name)=>{
@@ -99,11 +154,41 @@ const Collection = () => {
         setEnableReadingsModal(true);
         
     }
+    const handleCalculationChange=(event,submeterId,date)=>{
+        const tempData = [...calculationData];
+       const idx = tempData.findIndex((el)=>el.id===submeterId);
+       if(date === 'from'){
+        tempData[idx].previous=event.target.value;
+       }
+       else if(date === 'to'){
+        tempData[idx].current=event.target.value;
+       }
+        setCalculationData(tempData);       
+    }
+    const handleCalculation=()=>{
+        const tempData = [...calculationData];
+        if(unitPrice <=0){
+            return alert('Invalid Unit Price !!');
+        }
+        tempData.map(t=>{
+            
+            if(t.previous == '' || t.current == ''){
+                
+               return alert(`Fields are not selected in ${t.name}`);
+            }
+            else if(t.current < t.previous){
+             return   alert(`Previous reading is greater than recent reading in ${t.name}`);
+            }
+            t.units = t.current-t.previous;
+            t.cost=t.units*unitPrice;
+        });
 
+        setCalculationData(tempData);
+    }
     return (
         <>
             <Navbar/>
-            {collection && <div className='collectionDetailWrapper'>
+            { collection && <div className='collectionDetailWrapper'>
                {enableReadingsModal && <ReadingsModal submeter={submeterForReadings} enableModal={enableReadingsModal}  closeModal={()=>setEnableReadingsModal(false)}/>}
             <div className='container'>
                  <div className='collectionNameHeader'>
@@ -159,7 +244,7 @@ const Collection = () => {
                     </div>
                    
                     </div>} 
-
+{submeterList && submeterList.length > 0 && <>
                     <div className='submeterListContainer'>
                         <ul>
                             <li>Submeter Collection lists</li>
@@ -172,73 +257,110 @@ const Collection = () => {
                                         ))) || <li className='loading'>Loading... Please wait !!!</li> }
                         </ul>
                     </div>
-                    {readingList && <div className='viewReadings'>
+                    {readingSuccess && calculationData.length > 0 && readingList && <div className='viewReadings'>
                         <div className='click-here' onClick={()=>{setToggleView(state=>state===false?true:false)}}>Click here to see readings of Submeter</div>
                         <div className={`submeterListView ${toggleView ===true?'roll':''}`}>
-                            <div className='filterReadings'>
-                                <input placeholder='Year' type='number'/>
-                                <select >
-												<option value='January'>January</option>
-												<option value='Feburary'>Feburary</option>
-												<option value='March'>March</option>
-												<option value='April'>April</option>
-												<option value='May'>May</option>
-												<option value='June'>June</option>
-												<option value='July'>July</option>
-												<option value='August'>August</option>
-												<option value='September'>September</option>
-												<option value='October'>October</option>
-												<option value='November'>November</option>
-												<option value='December'>December</option>
-											</select>
-                                <span>To</span>
-                                <input placeholder='Year' type='number'/>
-                                <select >
-												<option value='January'>January</option>
-												<option value='Feburary'>Feburary</option>
-												<option value='March'>March</option>
-												<option value='April'>April</option>
-												<option value='May'>May</option>
-												<option value='June'>June</option>
-												<option value='July'>July</option>
-												<option value='August'>August</option>
-												<option value='September'>September</option>
-												<option value='October'>October</option>
-												<option value='November'>November</option>
-												<option value='December'>December</option>
-											</select>
-                                <button>Filter</button>
-
-                            </div>
+                        
                             <div className='submeter-readings'>
                             <div className='submeterNames'>
                                 {submeterList.map(value=>{
-                                    return(<div key={value._id} >
+                                    return(<div key={value._id} className='text' onClick={()=>{filterReadings(value._id)}}>
                                         {value.name}
                                     </div>)
                                 })}
                             </div>
                             <div className='submeterReadings'>
-                                <h1 className='submeterNameTitle'>Title</h1>
-                                <div className='yearMonthWrapper'>
-                                    <div><span className='date'>Date</span>:January-2020</div>
-                                    <div>
-                                        <span  className='readings'>Reading</span>:123467890
-                                    </div>
+                                <h1 className='submeterNameTitle'>{selectedTitle}</h1>
+                                <div className='yearMonthWrapper' >
+                                        <div className='date title'>Readings for</div>
+                                        <div  className='readings title'>Readings</div>
                                 </div>
-                                <div className='yearMonthWrapper'>
-                                <div><span className='date'>Date</span>:January-2020</div>
-                                    <div>
-                                        <span  className='readings'>Reading</span>:123467890
-                                    </div>
-                                </div>
+                                {filteredReadings===undefined && <div>No Readings</div>}
+                                {filteredReadings && filteredReadings.map((reading)=> (
+                                     <div className='yearMonthWrapper'  key={reading._id}>
+                                     <div className='date '>{reading.readingsYear}-{reading.readingsMonth}</div>
+                                     <div  className='readings '>{reading.readings}</div>
+                                </div>))}
+                              
                             </div>
                             </div>
                         </div>
                     </div>}
-
-
+                
+                    <div className='calculationOfCostAndUnits'>
+                        <h1>Calculation</h1>
+                        {enableCalculation && calculationData.length > 0 && readingList && readingList.map((data,index)=>(
+                        <div key={data.id} className='calculationTable'>
+                            <div className='submeterName'> {submeterList[index].name}</div>
+                            <div className='from-to'>
+                            <div className='submeterFrom'>
+                                <select 
+                                    onChange={(e)=>{handleCalculationChange(e,data[0].submeter._id,'from')}}
+                                >
+                                    <option value=''>From</option>
+                                    {data.map((readingData)=>{
+                                        return(
+                                            <option key={`${readingData.readingsYear}-${readingData.readingsMonth}`}
+                                                    value={readingData.readings}>
+                                                {`${readingData.readingsYear}-${readingData.readingsMonth}`}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                            </div>
+                            <div>-</div>
+                            <div className='submeterTo'>
+                            <select 
+                                    onChange={(e)=>{handleCalculationChange(e,data[0].submeter._id,'to')}}
+                            >
+                                <option value=''>To</option>
+                                    {data.map((readingData)=>{
+                                        return(
+                                            <option key={`${readingData.readingsYear}-${readingData.readingsMonth}`}
+                                                    value={readingData.readings}>
+                                                {`${readingData.readingsYear}-${readingData.readingsMonth}`}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                            </div>
+                            </div>
+                        </div>))}
+                        <div className='unit-wrapper'>
+                          <span>Unit price :</span>Rs. <input type='number' value={unitPrice} onChange={(e)=>{setUnitPrice(e.target.value)}} />
+                        </div>  
+                        <div className='btn-wrapper'>
+                            <button className='add-submeter-btn calculate-btn' onClick={handleCalculation}>Calculate</button>
+                        </div>
+                        <div className='Result'>
+                            <div className='rowWrapper'>
+                                <div>Name</div>
+                                <div>Previous</div>
+                                <div>Current</div>
+                                <div>Units</div>
+                                <div>Cost(Rs.)</div>
+                            </div>
+                            {calculationData.map((data)=>{
+                             return   <div className='rowWrapper' key={data.id}>
+                                    <div>{data.name}</div>
+                                    <div>{data.previous}</div>
+                                    <div>{data.current}</div>
+                                    <div>{data.units}</div>
+                                    <div>{data.cost}</div>
+                                </div>
+                            })}
+                            <div className='rowWrapper'>
+                                <div>Total</div>
+                                <div></div>
+                                <div></div>
+                                <div>{calculationData.reduce((a,c)=>(a+c.units),0)}</div>
+                                <div>{calculationData.reduce((a,c)=>(a+c.cost),0)}</div>
+                            </div>
+                        </div>
+                    </div>
+            </>}
                 </div>
+
             </div>}
         </>
     );
