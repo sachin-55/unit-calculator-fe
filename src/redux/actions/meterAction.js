@@ -29,7 +29,8 @@ import {
   COLLECTION_REMOVE_REQUEST,
   COLLECTION_REMOVE_SUCCESS,
   COLLECTION_REMOVE_FAIL,
-  COLLECTION_REMOVE_SUCCESS_FALSE
+  COLLECTION_REMOVE_SUCCESS_FALSE,
+  READINGS_REMOVE_FAIL,READINGS_REMOVE_REQUEST,READINGS_REMOVE_SUCCESS,READINGS_REMOVE_SUCCESS_FALSE
 } from '../constants/meterConstants';
 import { CLOSE_CREATE_COLLECTION } from '../constants/UIConstants';
 
@@ -323,6 +324,37 @@ const loadReadings = ()=>async (dispatch,getState)=>{
   }
 }
 
+const setReadingsSuccessFalse=()=>(dispatch)=>{
+  dispatch({
+    type: READINGS_REMOVE_SUCCESS_FALSE,
+  });
+}
 
+const removeReadings = (readingId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: READINGS_REMOVE_REQUEST,
+    });
+    const {userLogin:{userInfo}}= getState();
+    const config = {
+      headers:{
+          'Authorization':`Bearer ${userInfo.token}`
+      }
+  }
+    const {data} =await Axios.delete(`${process.env.HOST_API_URL}/api/v1/readings/${readingId}`,config);
 
-export { setSubmeterSuccessFalse,saveCollection, setCollectionSuccessFalse, loadCollectionList,getCollectionDetails,saveSubmeter,loadSubmeterList,saveReadings,loadReadings ,removeCollection,removeSubmeter};
+   
+  dispatch({
+    type: READINGS_REMOVE_SUCCESS,
+    payload:data
+  });
+
+} catch (error) {
+  dispatch({
+    type: READINGS_REMOVE_FAIL,
+    payload: error.response.data.message,
+  });
+}
+};
+
+export { setSubmeterSuccessFalse,saveCollection, setCollectionSuccessFalse, loadCollectionList,getCollectionDetails,saveSubmeter,loadSubmeterList,saveReadings,loadReadings ,removeCollection,removeSubmeter,removeReadings,setReadingsSuccessFalse};

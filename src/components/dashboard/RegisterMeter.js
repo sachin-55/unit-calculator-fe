@@ -62,12 +62,15 @@ const RegisterMeter = () => {
                       Add New Meter Collection
                     </button>
         </div>
-        <div className="register-meter__title2">
-                      <h3>List of Submeter-Collections </h3>
+        {collectionList && collectionList <= 0 &&
+          <div className='not-register'>
+          Register New Collection for further calculation.
+          <div style={{fontSize:'15px',color:'#fff'}}>
+            Here Collection is group of submeters.<br/>
+            Like :- [ Home ] can be a collection of meters such as [first floor,second floor, e.t.c ]
             </div>
-            <p className='description'>
-                Every list consist of submeters.
-            </p>
+        </div>}
+     
               {createCollection ?
                   <div className="register-meter">
                   <div className="register-meter__title">
@@ -90,8 +93,17 @@ const RegisterMeter = () => {
           </div>
           </div>
                   :null}
+        {collectionList && collectionList.length >0 && <>
 
+          <div className="register-meter__title2">
+                      <h3>List of Submeter-Collections </h3>
+            </div>
+            <p className='description'>
+                Every list consist of submeters.
+            </p>
         <div className="meterCollectionList">
+        <div className='info2'>Info: Click on the collection name to register its submeters.</div>
+
                   <ul>
             <li>Submeter Collection lists</li>
                       {(collectionList && collectionList.map(collection => (
@@ -107,7 +119,7 @@ const RegisterMeter = () => {
                           ))) || <li className='loading'>Loading... Please wait !!!</li>}
           </ul>
         </div>
-
+        </>}
         {/* <MeterReadingsAndCalculation meterCollectionName={meterCollectionName} meters={meter} updatedMeter={setMeter}/> */}
       </div>
     </div>

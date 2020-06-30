@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import '../../scss/collection.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation, Link } from 'react-router-dom';
-import { setSubmeterSuccessFalse,loadSubmeterList, saveSubmeter, loadReadings, removeSubmeter} from '../../redux/actions/meterAction';
+import { setSubmeterSuccessFalse,loadSubmeterList, saveSubmeter, loadReadings, removeSubmeter, removeReadings} from '../../redux/actions/meterAction';
 import {openCreateSubmeter, closeCreateSubmeter} from '../../redux/actions/UIActions';
 
 import ReadingsModal  from '../submeterReadingsModal/ReadingsModal';
@@ -39,6 +39,8 @@ const Collection = () => {
     const {loading:loadingSave,error:errorSave,success} = useSelector(state=>state.submeterSave);
     const {loading:loadingDelete,error:errorDelete,success:successDelete} = useSelector(state=>state.submeterRemove);
 
+    const {loading:loadingDeleteRead,error:errorDeleteRead,success:successDeleteRead} = useSelector(state=>state.readingsRemove);
+
 
     const submetersList = useSelector(state=>state.submetersList);
     const {submeterList,loading,error,success:loadSuccess} = submetersList;
@@ -60,7 +62,7 @@ const Collection = () => {
     React.useEffect(()=>{
         dispatch(loadReadings());
         // setEnableCalculation(true);
-    },[loadSuccess,successReadingSave]);
+    },[loadSuccess,successReadingSave,successDeleteRead]);
 
     React.useEffect(()=>{
     if(submeterList && readingList){
@@ -199,6 +201,11 @@ const Collection = () => {
         });
        setEnableDeleteModal(true);
     }
+    const handleReadingsDeletion = (id,name)=>{
+        if(confirm(`Are you ok with removing reading of ${name}`)){
+            dispatch(removeReadings(id));
+        }
+    }
     return (
         <>
             <Navbar/>
@@ -278,7 +285,7 @@ const Collection = () => {
                         </ul>
                     </div>
                     {readingSuccess && calculationData.length > 0 && readingList && <div className='viewReadings'>
-                        <div className='click-here' onClick={()=>{setToggleView(state=>state===false?true:false)}}>Click here to see readings of Submeter</div>
+                        <div className='click-here' onClick={()=>{setToggleView(state=>state===false?true:false)}}>Click here to see/delete readings of Submeter</div>
                         <div className={`submeterListView ${toggleView ===true?'roll':''}`}>
                         
                             <div className='submeter-readings'>
@@ -294,12 +301,16 @@ const Collection = () => {
                                 <div className='yearMonthWrapper' >
                                         <div className='date title'>Readings for</div>
                                         <div  className='readings title'>Readings</div>
+                                        <div  className='readings title'>Delete</div>
+
                                 </div>
                                 {filteredReadings===undefined && <div>No Readings</div>}
                                 {filteredReadings && filteredReadings.map((reading)=> (
                                      <div className='yearMonthWrapper'  key={reading._id}>
                                      <div className='date '>{reading.readingsYear}-{reading.readingsMonth}</div>
                                      <div  className='readings '>{reading.readings}</div>
+                                     <div  className='delete' onClick={()=>{handleReadingsDeletion(reading._id,`${reading.readingsYear}-${reading.readingsMonth}`)}}>x</div>
+
                                 </div>))}
                               
                             </div>

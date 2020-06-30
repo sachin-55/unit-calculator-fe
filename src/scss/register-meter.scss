@@ -23,6 +23,7 @@
     transition: 0.3s;
     cursor: pointer;
     outline: none;
+    margin: 3rem 0;
 }
 .addNewMeterCollectionBtn:hover{
     background-color: rgba(14, 80, 121, 1);
@@ -177,14 +178,22 @@
     color: red;
 }
 
+.not-register{
+    text-align: center;
+    font-size: 2rem;
+    border: 1px solid rgb(114, 107, 107);
+    color: rgb(219, 183, 183);
+    padding: 1rem 0;
+    margin: 3rem 0;
+}
 
+.info2{
+    border: 1px solid rgb(177, 157, 157);
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgb(167, 212, 164);
+    padding: 0.5rem 0;
+    width: 90%;
+    margin: 0.5rem auto;
 
-
-
-
-
-
-
-
-
-
+}

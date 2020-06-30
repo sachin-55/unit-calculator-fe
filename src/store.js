@@ -11,7 +11,8 @@ import {
   readingsSaveReducer,
   readingsLoadReducer,
   submeterRemoveReducer,
-  collectionRemoveReducer
+  collectionRemoveReducer,
+  readingsRemoveReducer
 } from "./redux/reducers/meterReducers";
 import { UIReducers } from "./redux/reducers/UIreducers";
 
@@ -37,6 +38,7 @@ const reducer = combineReducers({
   UI: UIReducers,
   readingsSave:readingsSaveReducer,
   readingsList:readingsLoadReducer,
+  readingsRemove:readingsRemoveReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

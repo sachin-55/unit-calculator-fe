@@ -29,7 +29,11 @@ import {
   COLLECTION_REMOVE_REQUEST,
   COLLECTION_REMOVE_SUCCESS,
   COLLECTION_REMOVE_FAIL,
-  COLLECTION_REMOVE_SUCCESS_FALSE
+  COLLECTION_REMOVE_SUCCESS_FALSE,
+  READINGS_REMOVE_REQUEST,
+  READINGS_REMOVE_SUCCESS,
+  READINGS_REMOVE_FAIL,
+  READINGS_REMOVE_SUCCESS_FALSE
 } from "../constants/meterConstants";
 
 const submeterSaveReducer = (state = {submeters:[],success:false}, action) => {
@@ -241,5 +245,40 @@ const readingsLoadReducer = (state = {readings:[]}, action) => {
       return state;
   }
 };
+
+const readingsRemoveReducer = (state = {readings:[],success:false}, action) => {
+  switch (action.type) {
+    case READINGS_REMOVE_REQUEST:
+      return { loading: true ,success:false};
+    case READINGS_REMOVE_SUCCESS:
+      return {
+        loading: false,
+        readings:action.payload,
+        success:true
+      };
+    case READINGS_REMOVE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+        success:false
+      };
+    case READINGS_REMOVE_SUCCESS_FALSE:
+      return {
+        success:false
+      }
+    default:
+      return state;
+  }
+};
   
-export { submeterSaveReducer,submeterListReducer, submeterRemoveReducer,collectionSaveReducer,collectionRemoveReducer,collectionListReducer,collectionDetailsReducer,readingsSaveReducer,readingsLoadReducer };
+export { submeterSaveReducer,
+  submeterListReducer, 
+  submeterRemoveReducer,
+  collectionSaveReducer,
+  collectionRemoveReducer,
+  collectionListReducer,
+  collectionDetailsReducer,
+  readingsSaveReducer,
+  readingsLoadReducer,
+  readingsRemoveReducer,
+ };

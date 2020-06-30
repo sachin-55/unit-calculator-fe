@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../scss/home2.scss'
 import MeterReadingsAndCalculation from './MeterReadingsAndCalculation';
+import { Link } from 'react-router-dom';
 
 const HomeSecond = () => {
     const [meterNumber,setMeterNumber] = React.useState(1);
@@ -47,6 +48,9 @@ const HomeSecond = () => {
     return (
         <div className='register-meter-wrapper'>
             <div className='container'>
+                    <div className='register-meter' style={{marginBottom:'50px',fontSize:'12px' ,color:'white'}}>
+                        Here you calculate your meter readings by providing data but in <Link to='/register' style={{color:'white',fontSize:'15px'}}>Register</Link> tab you can store your data for future use and easy calculation.
+                    </div>
                 <div className='register-meter'>
                     <div className='register-meter__title'>
                         <h1>Enter number of sub-meters</h1> 
