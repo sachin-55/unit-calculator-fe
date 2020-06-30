@@ -227,9 +227,7 @@ const MeterReadingsAndCalculation = ({meterCollectionName,meters,updatedMeter}) 
                 </div>
             :null}
              </div>
-             <div className='db-btn'>
-                <button className="saveToDB" onClick={handleSave}>Save</button>
-             </div>
+           
              {divisionCount > 1 ? 
                 <Modal  
                     showModal = {showDivisionModal} 
