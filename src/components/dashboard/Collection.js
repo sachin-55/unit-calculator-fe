@@ -3,13 +3,12 @@ import Navbar from './Navbar';
 import '../../scss/collection.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation, Link } from 'react-router-dom';
-import { loadSubmeterList, saveSubmeter, loadReadings} from '../../redux/actions/meterAction';
+import { setSubmeterSuccessFalse,loadSubmeterList, saveSubmeter, loadReadings, removeSubmeter} from '../../redux/actions/meterAction';
 import {openCreateSubmeter, closeCreateSubmeter} from '../../redux/actions/UIActions';
 
-
-
-
 import ReadingsModal  from '../submeterReadingsModal/ReadingsModal';
+import DeleteModal from '../deleteModal/DeleteModal';
+
 const Collection = () => {
     const [meterNumber,setMeterNumber] = React.useState(1);
     const meterInitial={
@@ -21,6 +20,9 @@ const Collection = () => {
     }
     const [meter,setMeter] = React.useState([{...meterInitial}]);
     const [enableReadingsModal,setEnableReadingsModal] = React.useState(false);
+    const [enableDeleteModal,setEnableDeleteModal] = React.useState(false);
+    
+    
     const [submeterForReadings,setSubmeterForReadings] = React.useState({});
     const [arrangeReadings,setArrangeReadings] = React.useState({});
     const [filteredReadings,setFilteredReadings] = React.useState();
@@ -35,9 +37,12 @@ const Collection = () => {
     const {createSubmeter} =  useSelector(state=>state.UI)
     
     const {loading:loadingSave,error:errorSave,success} = useSelector(state=>state.submeterSave);
+    const {loading:loadingDelete,error:errorDelete,success:successDelete} = useSelector(state=>state.submeterRemove);
+
 
     const submetersList = useSelector(state=>state.submetersList);
     const {submeterList,loading,error,success:loadSuccess} = submetersList;
+
 
     const readingsList = useSelector(state=>state.readingsList);
     const {readingList,loading:readingLoading,error:readingError,success:readingSuccess} = readingsList;
@@ -50,9 +55,7 @@ const Collection = () => {
 
     React.useEffect(()=>{
         dispatch(loadSubmeterList(collectionId));
-        // location.reload();
-    },[success]);
-
+    },[success,successDelete]);
 
     React.useEffect(()=>{
         dispatch(loadReadings());
@@ -63,7 +66,7 @@ const Collection = () => {
     if(submeterList && readingList){
         const submeterId = submeterList.map((x)=>x._id);
 
-        let normalizedList={};
+        // let normalizedList={};
 
         filterReadings(submeterId[0]);
         
@@ -146,6 +149,7 @@ const Collection = () => {
        }
     
     const submeterReadingsHandler=(id,name)=>{
+
         setSubmeterForReadings({
             id,
             name,
@@ -174,7 +178,7 @@ const Collection = () => {
             
             if(t.previous == '' || t.current == ''){
                 
-               return alert(`Fields are not selected in ${t.name}`);
+               return alert(`Duration is not selected in ${t.name}`);
             }
             else if(t.current < t.previous){
              return   alert(`Previous reading is greater than recent reading in ${t.name}`);
@@ -185,11 +189,23 @@ const Collection = () => {
 
         setCalculationData(tempData);
     }
+
+    const handleRemoveSubmeters=(submeterId,name)=>{
+        dispatch(setSubmeterSuccessFalse());
+        setSubmeterForReadings({
+            id:submeterId,
+            name,
+            collectionName:collection.name
+        });
+       setEnableDeleteModal(true);
+    }
     return (
         <>
             <Navbar/>
             { collection && <div className='collectionDetailWrapper'>
                {enableReadingsModal && <ReadingsModal submeter={submeterForReadings} enableModal={enableReadingsModal}  closeModal={()=>setEnableReadingsModal(false)}/>}
+               {enableDeleteModal && <DeleteModal type='submeter' data={submeterForReadings} enableModal={enableDeleteModal}  closeModal={()=>setEnableDeleteModal(false)}/>}
+            
             <div className='container'>
                  <div className='collectionNameHeader'>
                     <h1>{collection.name} </h1>
@@ -209,7 +225,7 @@ const Collection = () => {
                     </div>
                   
                     <div className='register-submeter__collection'>
-
+                       {submeterList && <div className='numberOfList'>Number of submeters : {submeterList.length}</div>}
                         <div className='register-submeter__name'>
                             {meter.map((val,idx)=>{
                                 const meterId = `meter-${idx}`;
@@ -244,15 +260,19 @@ const Collection = () => {
                     </div>
                    
                     </div>} 
-{submeterList && submeterList.length > 0 && <>
+                    {submeterList <= 0 && <div className='not-registered'>Register New Submeter for further calculation </div>}
+                {submeterList && readingSuccess && submeterList.length > 0 && <>
+
                     <div className='submeterListContainer'>
+                        <div className='info'>Info: Click on the submeter name to register its reading data</div>
                         <ul>
                             <li>Submeter Collection lists</li>
+                       {submeterList && <div className='numberOfList'>Number of submeters : {submeterList.length}</div>}
                            
                                     {(submeterList && submeterList.map(submeter => (
-                                            <li key={submeter._id} className='submeterItem' onClick={()=>{submeterReadingsHandler(submeter._id,submeter.name)}}>
-                                                <div >{submeter.name}</div>
-                                                <span>X</span>
+                                            <li key={submeter._id} className='submeterItem' >
+                                                <div onClick={()=>{submeterReadingsHandler(submeter._id,submeter.name)}}>{submeter.name}</div>
+                                                <span onClick={()=>{handleRemoveSubmeters(submeter._id,submeter.name)}}>X</span>
                                             </li>
                                         ))) || <li className='loading'>Loading... Please wait !!!</li> }
                         </ul>
@@ -289,7 +309,23 @@ const Collection = () => {
                 
                     <div className='calculationOfCostAndUnits'>
                         <h1>Calculation</h1>
-                        {enableCalculation && calculationData.length > 0 && readingList && readingList.map((data,index)=>(
+                        <div className='calculationTable title'>
+                            <div className='submeterName'> Submeter Name</div>
+                            <div className='from-to'>
+                            <div className='submeterFrom'>
+                                <select>
+                                    <option value=''>From</option>
+                                </select>
+                            </div>
+                            <div>-</div>
+                            <div className='submeterTo'>
+                            <select>
+                                <option value=''>To</option>
+                            </select>
+                            </div>
+                            </div>
+                        </div>
+                        {enableCalculation  &&readingList && readingList.map((data,index)=>(
                         <div key={data.id} className='calculationTable'>
                             <div className='submeterName'> {submeterList[index].name}</div>
                             <div className='from-to'>
@@ -332,7 +368,7 @@ const Collection = () => {
                         <div className='btn-wrapper'>
                             <button className='add-submeter-btn calculate-btn' onClick={handleCalculation}>Calculate</button>
                         </div>
-                        <div className='Result'>
+                        <div className='result'>
                             <div className='rowWrapper'>
                                 <div>Name</div>
                                 <div>Previous</div>

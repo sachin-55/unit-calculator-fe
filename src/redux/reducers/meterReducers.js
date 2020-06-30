@@ -21,7 +21,15 @@ import {
   READINGS_SAVE_FAIL,
   READINGSLIST_LOAD_REQUEST,
   READINGSLIST_LOAD_SUCCESS,
-  READINGSLIST_LOAD_FAIL
+  READINGSLIST_LOAD_FAIL,
+  SUBMETER_REMOVE_REQUEST,
+  SUBMETER_REMOVE_SUCCESS,
+  SUBMETER_REMOVE_FAIL,
+  SUBMETER_REMOVE_SUCCESS_FALSE,
+  COLLECTION_REMOVE_REQUEST,
+  COLLECTION_REMOVE_SUCCESS,
+  COLLECTION_REMOVE_FAIL,
+  COLLECTION_REMOVE_SUCCESS_FALSE
 } from "../constants/meterConstants";
 
 const submeterSaveReducer = (state = {submeters:[],success:false}, action) => {
@@ -48,6 +56,32 @@ const submeterSaveReducer = (state = {submeters:[],success:false}, action) => {
       return state;
   }
 };
+
+const submeterRemoveReducer = (state = {submeters:[],success:false}, action) => {
+  switch (action.type) {
+    case SUBMETER_REMOVE_REQUEST:
+      return { loading: true ,success:false};
+    case SUBMETER_REMOVE_SUCCESS:
+      return {
+        loading: false,
+        submeters:action.payload,
+        success:true
+      };
+    case SUBMETER_REMOVE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+        success:false
+      };
+    case SUBMETER_REMOVE_SUCCESS_FALSE:
+      return {
+        success:false
+      }
+    default:
+      return state;
+  }
+};
+
 const submeterListReducer = (state = {submeterList:[]}, action) => {
   switch (action.type) {
     case SUBMETER_LIST_REQUEST:
@@ -141,7 +175,30 @@ const collectionListReducer = (state = {collectionList:[]}, action) => {
     }
   };
 
-
+  const collectionRemoveReducer = (state = {collections:[],success:false}, action) => {
+    switch (action.type) {
+      case COLLECTION_REMOVE_REQUEST:
+        return { loading: true ,success:false};
+      case COLLECTION_REMOVE_SUCCESS:
+        return {
+          loading: false,
+          collections:action.payload,
+          success:true
+        };
+      case COLLECTION_REMOVE_FAIL:
+        return {
+          loading: false,
+          error: action.payload,
+          success:false
+        };
+      case COLLECTION_REMOVE_SUCCESS_FALSE:
+        return {
+          success:false
+        }
+      default:
+        return state;
+    }
+  };
 
 const readingsSaveReducer = (state = {readings:[]}, action) => {
   switch (action.type) {
@@ -185,4 +242,4 @@ const readingsLoadReducer = (state = {readings:[]}, action) => {
   }
 };
   
-export { submeterSaveReducer,submeterListReducer, collectionSaveReducer,collectionListReducer,collectionDetailsReducer,readingsSaveReducer,readingsLoadReducer };
+export { submeterSaveReducer,submeterListReducer, submeterRemoveReducer,collectionSaveReducer,collectionRemoveReducer,collectionListReducer,collectionDetailsReducer,readingsSaveReducer,readingsLoadReducer };

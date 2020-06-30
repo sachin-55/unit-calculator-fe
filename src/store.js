@@ -9,7 +9,9 @@ import {
   collectionDetailsReducer,
   submeterListReducer,
   readingsSaveReducer,
-  readingsLoadReducer
+  readingsLoadReducer,
+  submeterRemoveReducer,
+  collectionRemoveReducer
 } from "./redux/reducers/meterReducers";
 import { UIReducers } from "./redux/reducers/UIreducers";
 
@@ -18,6 +20,7 @@ const collectionList = [];
 const initialState = {
   userLogin: { ...userInfo },
   userRegister:{ userInfo:null },
+  submetersList:{submeterList:[]},
   UI: { createCollection: false },
 };
 
@@ -25,10 +28,12 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   submeterSave: submeterSaveReducer,
+  submeterRemove:submeterRemoveReducer,
   submetersList:submeterListReducer,
   collectionSave: collectionSaveReducer,
   collectionList:collectionListReducer,
   collectionDetails:collectionDetailsReducer,
+  collectionRemove:collectionRemoveReducer,
   UI: UIReducers,
   readingsSave:readingsSaveReducer,
   readingsList:readingsLoadReducer,

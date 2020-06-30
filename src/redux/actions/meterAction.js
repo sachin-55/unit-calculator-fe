@@ -21,7 +21,15 @@ import {
   READINGS_SAVE_SUCCESS,
   READINGSLIST_LOAD_REQUEST,
   READINGSLIST_LOAD_SUCCESS,
-  READINGSLIST_LOAD_FAIL
+  READINGSLIST_LOAD_FAIL,
+  SUBMETER_REMOVE_REQUEST,
+  SUBMETER_REMOVE_SUCCESS,
+  SUBMETER_REMOVE_FAIL,
+  SUBMETER_REMOVE_SUCCESS_FALSE,
+  COLLECTION_REMOVE_REQUEST,
+  COLLECTION_REMOVE_SUCCESS,
+  COLLECTION_REMOVE_FAIL,
+  COLLECTION_REMOVE_SUCCESS_FALSE
 } from '../constants/meterConstants';
 import { CLOSE_CREATE_COLLECTION } from '../constants/UIConstants';
 
@@ -77,6 +85,39 @@ const saveCollection = (collectionName) => async (dispatch, getState) => {
     dispatch({
       type: COLLECTION_SAVE_FAIL,
       payload: error.message,
+    });
+  }
+};
+const setCollectionSuccessFalse=()=>(dispatch)=>{
+  dispatch({
+    type: COLLECTION_REMOVE_SUCCESS_FALSE,
+  });
+}
+
+const removeCollection = (collectionId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: COLLECTION_REMOVE_REQUEST,
+    });
+    const {userLogin:{userInfo}}= getState();
+    const config = {
+      headers:{
+          'Authorization':`Bearer ${userInfo.token}`
+      }
+  }
+    const {data} =await Axios.delete(`${process.env.HOST_API_URL}/api/v1/collections/${collectionId}`,config);
+
+   
+  dispatch({
+    type: COLLECTION_REMOVE_SUCCESS,
+    payload:data
+  });
+   
+
+  } catch (error) {
+    dispatch({
+      type: COLLECTION_REMOVE_FAIL,
+      payload: error.response.data.message,
     });
   }
 };
@@ -161,6 +202,42 @@ const saveSubmeter = (collectionId,meters) => async (dispatch, getState) => {
     });
   }
 };
+
+const setSubmeterSuccessFalse=()=>(dispatch)=>{
+  dispatch({
+    type: SUBMETER_REMOVE_SUCCESS_FALSE,
+  });
+}
+
+const removeSubmeter = (submeterId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: SUBMETER_REMOVE_REQUEST,
+    });
+    const {userLogin:{userInfo}}= getState();
+    const config = {
+      headers:{
+          'Authorization':`Bearer ${userInfo.token}`
+      }
+  }
+    const {data} =await Axios.delete(`${process.env.HOST_API_URL}/api/v1/submeters/${submeterId}`,config);
+
+   
+  dispatch({
+    type: SUBMETER_REMOVE_SUCCESS,
+    payload:data
+  });
+   
+
+  } catch (error) {
+    dispatch({
+      type: SUBMETER_REMOVE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
 
 
 
@@ -248,4 +325,4 @@ const loadReadings = ()=>async (dispatch,getState)=>{
 
 
 
-export { saveCollection, loadCollectionList,getCollectionDetails,saveSubmeter,loadSubmeterList,saveReadings,loadReadings };
+export { setSubmeterSuccessFalse,saveCollection, setCollectionSuccessFalse, loadCollectionList,getCollectionDetails,saveSubmeter,loadSubmeterList,saveReadings,loadReadings ,removeCollection,removeSubmeter};

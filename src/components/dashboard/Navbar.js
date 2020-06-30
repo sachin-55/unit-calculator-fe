@@ -45,9 +45,9 @@ const Navbar= (props) => {
                                 <Link to='/register' className='link-items'>
                                     <div className='nav-items'>Register</div>
                                 </Link>
-                                <Link to='/readings' className='link-items'>
+                                {/* <Link to='/readings' className='link-items'>
                                     <div className='nav-items'>Readings</div>
-                                </Link>
+                                </Link> */}
                                 <Link to='/' className='link-items'>
                                     <div className='nav-items' onClick={()=>dispatch(logout())}>Sign-Out</div>
                                 </Link>

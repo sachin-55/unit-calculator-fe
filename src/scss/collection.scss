@@ -2,7 +2,29 @@
 
 .collectionDetailWrapper{
     background: linear-gradient(0deg,  rgba(148,187,233,1) 0%, rgb(174, 238, 194) 50%, rgba(148,187,233,1) 100%);
-    padding: 3rem 0;
+    padding: 3rem 0 18rem 0;
+}
+.not-registered{
+    text-align: center;
+    font-size: 2rem;
+    border: 1px solid rgb(61, 54, 54);
+    color: rgb(73, 53, 53);
+    padding: 1rem 0;
+}
+.numberOfList{
+    font-size: 1.3rem;
+    color: #fff;
+    text-align: center;
+}
+.info{
+    border: 1px solid black;
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgb(4, 31, 2);
+    padding: 0.5rem 0;
+    width: 90%;
+    margin: 0.5rem auto;
+
 }
 .collectionNameHeader{
     display: flex;
@@ -138,25 +160,23 @@
 
 }
 .submeterItem{
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .submeterItem > div{
-  width: 100%;
   cursor: pointer;
+  flex: 1;
 }
 .submeterItem span{
-    position: absolute;
-    right: 0;
-    font-size: 1.5rem;
-    padding: 1rem;
+    padding: 0.5rem 0.5rem;
+    border: 1px solid rgb(102, 88, 88);
     cursor: pointer;
-    z-index: 2;
 }
 .submeterItem span:hover{
     color: red;
+    border: 1px solid rgb(190, 78, 78);
+
 }
 
 ////////////////////////////////////////////
@@ -295,13 +315,26 @@ z-index: 2;
     align-items: center;
     padding: 0.5rem;
     border-bottom: 1px solid gray;
+    max-width: 60rem;
 
+
+}
+.calculationTable.title{
+    background-color: rgba(2, 2, 2, 0.701);
+    color: rgb(31, 47, 97);
+    border-bottom: 2px solid black;
+}
+.calculationTable.title select,
+.calculationTable.title > div:first-child{
+    background-color: rgb(2, 2, 2);
+    color: rgb(189, 198, 226);
+    border-bottom: 2px solid black;
 }
 .from-to{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    flex: 3;
+    flex: 2;
     flex-wrap: wrap;
     margin: 0 3rem;
     padding: 0.5rem;
@@ -344,7 +377,8 @@ z-index: 2;
 }
 ////////////////////////////////
 .result{
-
+    max-width: 75rem;
+    margin: 0 auto;
 }
 .rowWrapper{
     display: flex;

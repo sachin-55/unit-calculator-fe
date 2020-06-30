@@ -3,15 +3,18 @@ import "../../scss/register-meter.scss";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import MeterReadingsAndCalculation from './MeterReadingsAndCalculation';
-import {  saveCollection, loadCollectionList } from "../../redux/actions/meterAction";
+import {  saveCollection, loadCollectionList, removeCollection, setCollectionSuccessFalse } from "../../redux/actions/meterAction";
 import { 
   openCreateCollection,
   closeCreateCollection,
 } from "../../redux/actions/UIActions";
+import DeleteModal from "../deleteModal/DeleteModal";
 
 
 const RegisterMeter = () => {
   const [meterCollectionName, setMeterCollectionName] = React.useState('');
+  const [enableDeleteModal,setEnableDeleteModal] = React.useState(false);
+  const [collectionForDelete,setcollectionForDelete] = React.useState({});
 
   const collectionsList = useSelector(state => state.collectionList);
   const {collectionList,loading,error}=collectionsList;
@@ -19,21 +22,34 @@ const RegisterMeter = () => {
   const {collection,success,loading:saveLoading,error:saveError}=collectionSave;
   const { createCollection } = useSelector(state => state.UI);
 
+  const {loading:loadingDelete,error:errorDelete,success:successDelete} = useSelector(state=>state.collectionRemove);
+
   const dispatch = useDispatch();
 
 
   React.useEffect(()=>{
     dispatch(loadCollectionList());
-  },[success]);
+  },[success,successDelete]);
 
   const handleSaveCollection = async () =>  {
     dispatch(saveCollection(meterCollectionName));
     setMeterCollectionName('');
     dispatch(closeCreateCollection());
   };
+  const handleCollectionRemove=(id,name)=>{
+    dispatch(setCollectionSuccessFalse());
+    setcollectionForDelete({
+      id,
+      name
+    })
+    setEnableDeleteModal(true);
+  }
 
 
   return (
+    <>
+    {enableDeleteModal && <DeleteModal type='collection' data={collectionForDelete} enableModal={enableDeleteModal}  closeModal={()=>setEnableDeleteModal(false)}/>}
+
       <div className="register-meter-wrapper">
           <div className="container">
           <div className="register-meter__title">
@@ -86,7 +102,7 @@ const RegisterMeter = () => {
                                   }}> 
                                     <div>{collection.name}</div>
                                   </Link>
-                                <span>X</span>
+                                <span onClick={()=>{handleCollectionRemove(collection._id,collection.name)}}>X</span>
                             </li>
                           ))) || <li className='loading'>Loading... Please wait !!!</li>}
           </ul>
@@ -95,6 +111,7 @@ const RegisterMeter = () => {
         {/* <MeterReadingsAndCalculation meterCollectionName={meterCollectionName} meters={meter} updatedMeter={setMeter}/> */}
       </div>
     </div>
+    </>
   );
 };
 
