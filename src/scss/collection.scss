@@ -310,7 +310,7 @@ color: rgb(158, 0, 26);
     width: 100%;
     padding: 1rem;
     border: 1px solid lightblue;
-    margin: 5rem auto;
+    margin: 5rem 0;
 }
 .calculationOfCostAndUnits h1{
     font-size: 2rem;
@@ -392,6 +392,9 @@ color: rgb(158, 0, 26);
 .result{
     max-width: 75rem;
     margin: 0 auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .rowWrapper{
     display: flex;
