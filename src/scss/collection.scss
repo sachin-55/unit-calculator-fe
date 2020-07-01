@@ -388,7 +388,7 @@ color: rgb(158, 0, 26);
     padding: 0 3rem;
     width: 9rem;
 }
-////////////////////////////////
+//////////////////////////////// 
 .result{
     max-width: 75rem;
     position: relative;
@@ -418,4 +418,101 @@ color: rgb(158, 0, 26);
 }
 .rowWrapper > div:nth-child(1){
     flex-basis: 12rem;
+}
+//////////////////// 
+
+.divide-status-checkbox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(82, 82, 88, 0.544);
+    padding: 5rem 3rem;
+    margin-top: 5rem;
+}
+
+.divide-status-checkbox h1{
+    letter-spacing: 0.2rem;
+    font-size: 2rem;
+    border-bottom: 4px solid #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.divide-status-checkbox p{
+    letter-spacing: 0.1rem;
+    font-size: 1.3rem;
+    font-weight: 100;
+}
+.checkbox-input{
+    display: none;
+}
+.checkbox-box{
+    cursor: pointer;
+    padding: 1.5rem 3rem;
+    background-color:green ;
+    border: 1px solid #fff;
+    position: relative;
+    top: 1rem;
+    border-radius: 5rem;
+    transition: background-color 0.3s;
+    top: 3rem;
+}
+.checkbox-box::before{
+    position: absolute;
+    content: 'Enable Division';
+    top: 0;
+    left: 0;
+    display: inline-block;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 0.4rem 0;
+}
+
+.checkbox-input:checked + .checkbox-box{
+    background-color: rgb(202, 95, 95);
+}
+.checkbox-input:checked + .checkbox-box::before{
+    content: 'Disable Division';
+    font-weight: 800;
+
+}
+
+
+.divided-meter-calculation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(82, 82, 88, 0.544);
+    padding: 5rem 3rem;
+    margin-top: 5rem;
+}
+.divided-meter-calculation h1{
+    letter-spacing: 0.2rem;
+    font-size: 2rem;
+    border-bottom: 1px solid #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.number-of-user{
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+}
+.number-of-user input{
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border:0.5px double transparent;
+    border-bottom: 0.5px solid #fff;
+    background-color:transparent;
+    outline: none;
+    color: #fff;
+    width: 15rem;
+    transition: border 0.5s;
+}
+.number-of-user input:focus{
+    border:  0.5px solid #fff;
+}
+.number-of-user input::placeholder{
+    color: rgb(124, 124, 146);
+    transition: opacity 0.5s;
 }

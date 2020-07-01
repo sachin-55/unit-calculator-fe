@@ -8,6 +8,7 @@ import {openCreateSubmeter, closeCreateSubmeter} from '../../redux/actions/UIAct
 
 import ReadingsModal  from '../submeterReadingsModal/ReadingsModal';
 import DeleteModal from '../deleteModal/DeleteModal';
+import Modal from '../modal';
 
 const Collection = () => {
     const [meterNumber,setMeterNumber] = React.useState(1);
@@ -22,7 +23,13 @@ const Collection = () => {
     const [enableReadingsModal,setEnableReadingsModal] = React.useState(false);
     const [enableDeleteModal,setEnableDeleteModal] = React.useState(false);
     
-    
+    //for division of meters
+    const [divideStatus,setDivideStatus] = React.useState(false);
+    const [divisionCount, setDivisionCount] = React.useState(2);
+    const [showDivisionModal,setShowDivisionModal] = React.useState(false);
+    const [total,setTotal] = React.useState({});
+    const [divisionData,setDivideData] = React.useState([]);
+
     const [submeterForReadings,setSubmeterForReadings] = React.useState({});
     const [arrangeReadings,setArrangeReadings] = React.useState({});
     const [filteredReadings,setFilteredReadings] = React.useState();
@@ -206,6 +213,41 @@ const Collection = () => {
             dispatch(removeReadings(id));
         }
     }
+
+
+    const handleCheckBox =(e)=>{
+        if(e.target.checked){
+            setDivideStatus(true);
+        }else{
+            setDivideStatus(false);
+        }
+    }
+
+    const toggleDivisionModal=()=>{
+        setShowDivisionModal((showDivisionModal)=>  showDivisionModal === true? false:true);
+        const t={
+            totalCost:calculationData.reduce((a,c)=>(a+c.cost),0) ,
+            totalUnits:calculationData.reduce((a,c)=>(a+c.units),0)
+        }
+        setTotal(t);
+        const refactoredData = calculationData.map(data=>{
+            return(
+                {
+                    meterName:data.name,
+                    units:data.units,
+                    cost:data.cost,
+                    previous:data.previous,
+                    current:data.current
+
+                }
+            )
+        });
+         
+        setDivideData(refactoredData);
+
+    }
+
+
     return (
         <>
             <Navbar/>
@@ -405,6 +447,71 @@ const Collection = () => {
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+                    <div className='divide-status-checkbox'>
+                 <h1>Divide sub-meters</h1>
+                 <p>If you have to divide above calculation click on below button</p>
+                    <label htmlFor='checkbox-divide' className='checkbox-divide'>
+                        <input type='checkbox' id='checkbox-divide' className='checkbox-input' onChange={handleCheckBox}/>
+                        <span className='checkbox-box'></span>
+                    </label>
+                    {divideStatus === true ? <div className="divided-meter-calculation">
+                <h1>Cost of Each of You</h1>
+                <div className='number-of-user'>
+                <span>
+                        Number of User's: 
+                    </span> 
+                    <input type='number' placeholder="No. of user's" value={divisionCount}  onChange={(e)=>setDivisionCount(e.target.value)}/>
+                </div>
+                <button className='save-btn' disabled={divisionCount < 2?true:false} onClick={toggleDivisionModal}>Divide</button>
+
+                </div>
+            :null}
+             </div>
+           
+             {divisionCount > 1 ? 
+                <Modal  
+                    showModal = {showDivisionModal} 
+                    toggleModal={toggleDivisionModal} 
+                    allMeters={divisionData}
+                    divisionCount = {divisionCount} 
+                    collection= {collection.name} 
+                    totals={{...total}}
+                />
+             :null}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </>}
                 </div>
 

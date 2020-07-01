@@ -1,6 +1,6 @@
 import React from "react";
 import "../../scss/register-meter.scss";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import MeterReadingsAndCalculation from './MeterReadingsAndCalculation';
 import {  saveCollection, loadCollectionList, removeCollection, setCollectionSuccessFalse } from "../../redux/actions/meterAction";
@@ -21,6 +21,9 @@ const RegisterMeter = () => {
   const collectionSave = useSelector(state => state.collectionSave);
   const {collection,success,loading:saveLoading,error:saveError}=collectionSave;
   const { createCollection } = useSelector(state => state.UI);
+
+  const {loginStatus} = useSelector(state=>state.userLogin);
+  const {loginStatus:registerStatus} = useSelector(state=>state.userRegister);
 
   const {loading:loadingDelete,error:errorDelete,success:successDelete} = useSelector(state=>state.collectionRemove);
 
@@ -48,6 +51,8 @@ const RegisterMeter = () => {
 
   return (
     <>
+            {!loginStatus ? <Redirect to="/login" />:<>
+
     {enableDeleteModal && <DeleteModal type='collection' data={collectionForDelete} enableModal={enableDeleteModal}  closeModal={()=>setEnableDeleteModal(false)}/>}
 
       <div className="register-meter-wrapper">
@@ -120,9 +125,9 @@ const RegisterMeter = () => {
           </ul>
         </div>
         </>}
-        {/* <MeterReadingsAndCalculation meterCollectionName={meterCollectionName} meters={meter} updatedMeter={setMeter}/> */}
       </div>
     </div>
+            </>}
     </>
   );
 };

@@ -14,7 +14,9 @@ const LoginRegisterPage = () => {
     const [animateBackFromRegister,setAnimateBackFromRegister]=React.useState('');
     const animationForBox = `${animateLogin} ${animateRegister} ${animateBackFromLogin} ${animateBackFromRegister} `
    
-    const {loginStatus} = useSelector(state=>state.userLogin)
+    const {loginStatus} = useSelector(state=>state.userLogin);
+    const {loginStatus:registerStatus} = useSelector(state=>state.userRegister);
+
    
     const handleLoginClick=()=>{
         setAnimateLogin('animateLeft')
@@ -48,7 +50,7 @@ const LoginRegisterPage = () => {
 
     return (
         <div className='background-wrapper'>
-            {loginStatus ? <Redirect to="/home" />:
+            {loginStatus || registerStatus ? <Redirect to="/home" />:
             <>
                 <Navbar />
             <div className='container'>
